@@ -1,0 +1,28 @@
+LAST SEEN   TYPE     REASON                  OBJECT                                                   MESSAGE
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.RoleBinding
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              (combined from similar events): created resource hello-world-server of Type *v1.StatefulSet
+2m50s       Normal   Provisioning            persistentvolumeclaim/persistence-hello-world-server-0   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-0"
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-default-user of Type *v1.Secret
+2m50s       Normal   WaitForFirstConsumer    persistentvolumeclaim/persistence-hello-world-server-0   waiting for first consumer to be created before binding
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-erlang-cookie of Type *v1.Secret
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-peer-discovery of Type *v1.Role
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.ServiceAccount
+2m50s       Normal   SuccessfulCreate        statefulset/hello-world-server                           create Claim persistence-hello-world-server-0 Pod hello-world-server-0 in StatefulSet hello-world-server success
+2m50s       Normal   SuccessfulCreate        statefulset/hello-world-server                           create Pod hello-world-server-0 in StatefulSet hello-world-server successful
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-nodes of Type *v1.Service
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-plugins-conf of Type *v1.ConfigMap
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world-server-conf of Type *v1.ConfigMap
+2m50s       Normal   ExternalProvisioning    persistentvolumeclaim/persistence-hello-world-server-0   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+2m50s       Normal   SuccessfulCreate        rabbitmqcluster/hello-world                              created resource hello-world of Type *v1.Service
+2m46s       Normal   Scheduled               pod/hello-world-server-0                                 Successfully assigned rup-rabbitmq/hello-world-server-0 to reconcile-under-policy-single-node-control-plane
+2m46s       Normal   ProvisioningSucceeded   persistentvolumeclaim/persistence-hello-world-server-0   Successfully provisioned volume pvc-5a3a0232-db9a-44e1-99b4-f728034aab9b
+2m45s       Normal   Pulling                 pod/hello-world-server-0                                 Pulling image "rabbitmq:4.1.3-management"
+2m4s        Normal   SuccessfulUpdate        rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service
+2m4s        Normal   SuccessfulUpdate        rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+2m4s        Normal   SuccessfulUpdate        rabbitmqcluster/hello-world                              updated resource hello-world-server of Type *v1.StatefulSet
+58s         Normal   Created                 pod/hello-world-server-0                                 Created container: setup-container
+58s         Normal   Pulled                  pod/hello-world-server-0                                 Successfully pulled image "rabbitmq:4.1.3-management" in 1m47.172s (1m47.172s including waiting). Image size: 127830906 bytes.
+53s         Normal   Started                 pod/hello-world-server-0                                 Started container setup-container
+21s         Normal   Started                 pod/hello-world-server-0                                 Started container rabbitmq
+21s         Normal   Created                 pod/hello-world-server-0                                 Created container: rabbitmq
+21s         Normal   Pulled                  pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine

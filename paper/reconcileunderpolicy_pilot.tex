@@ -1,0 +1,312 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{array}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.5em}
+\setlist[enumerate]{leftmargin=1.7em}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\title{\textbf{ReconcileUnderPolicy: A Pilot Benchmark for Policy-Constrained Recovery in the RabbitMQ Cluster Operator}}
+\author{Mandar Joshi \\ \texttt{mandarjoshi1045@gmail.com}}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Kubernetes operators encode operational knowledge into control loops that
+deploy, scale, update, and recover complex applications. Prior work has shown
+that operator bugs are common and that controller correctness is challenging to
+validate, but fewer studies provide concrete, reproducible measurements of how a
+real operator behaves under policy-constrained recovery scenarios. This paper
+presents \emph{ReconcileUnderPolicy}, a small but executable benchmark focused on
+stateful operator recovery. The benchmark is implemented in a standalone
+repository, vendors the RabbitMQ Cluster Operator manifests locally, and runs on
+a single-node \texttt{kind} cluster. We evaluate three scenarios against the
+official RabbitMQ Cluster Operator: baseline cluster creation, scale-up during
+operator restart, and scale-up blocked by a temporary ResourceQuota. All three
+scenarios completed successfully in the pilot experiment, with end-to-end
+recovery times of 64.83\,s, 79.82\,s, and 79.49\,s respectively. The results
+do not yet constitute a broad operator benchmark across multiple systems, but
+they demonstrate that the proposed methodology is implementable, produces real
+artifact-backed measurements, and can distinguish ordinary reconciliation from
+fault- and policy-aware recovery workflows.
+\end{abstract}
+
+\section{Introduction}
+
+Kubernetes operators extend the platform with custom resources and controllers
+that automate domain-specific operational tasks such as provisioning,
+reconfiguration, scaling, and cleanup~\cite{k8s-operator}. In modern
+cloud-native environments, operators are increasingly responsible for stateful
+infrastructure such as databases, queues, and messaging systems. This makes
+their recovery behavior a systems concern rather than merely an implementation
+detail.
+
+The difficulty of building reliable operators is now well established. Recent
+work has demonstrated the prevalence of operator bugs, the complexity of
+controller interactions, and the value of systematic testing and fault
+injection~\cite{acto,sieve,watchers,issta-bugs}. However, many papers in this
+area either study broad bug corpora or introduce sophisticated frameworks that
+require substantial infrastructure to evaluate. For an individual researcher or
+student project, a practical question remains: can we build a small but real
+benchmark that exercises policy-constrained recovery on an actual operator and
+produces defensible measurements?
+
+This paper answers that question with a focused pilot study. We implement
+\emph{ReconcileUnderPolicy}, a benchmark repository that targets the official
+RabbitMQ Cluster Operator~\cite{rabbitmq-quickstart}. The benchmark vendors the
+operator manifests locally, launches a dedicated \texttt{kind} cluster, and
+runs three scenarios:
+
+\begin{enumerate}
+  \item baseline cluster creation,
+  \item scale-up while deliberately restarting the operator pod, and
+  \item scale-up temporarily blocked by a ResourceQuota and resumed after the
+  quota is removed.
+\end{enumerate}
+
+The benchmark therefore moves beyond a paper-only proposal. It includes:
+
+\begin{itemize}
+  \item a runnable Python benchmark harness,
+  \item vendored operator manifests,
+  \item scenario-specific snapshots of pod, StatefulSet, cluster, and event
+  state,
+  \item a machine-readable summary of measured timings and final outcomes.
+\end{itemize}
+
+This is still a pilot rather than a full multi-operator study. The present
+artifact covers a single operator and only one trial per scenario. Even so, it
+demonstrates a viable end-to-end methodology for policy-constrained recovery
+evaluation and provides a concrete base for a more ambitious empirical paper.
+
+\section{Background and Motivation}
+
+Operators follow the Kubernetes reconciliation model: a controller observes the
+current cluster state, compares it to the desired state expressed in a custom
+resource, and issues actions to reduce any mismatch~\cite{k8s-operator}. For
+stateful systems, this process involves more than creating Pods. It often
+includes storage provisioning, identity management, service configuration, and
+ordered startup or shutdown sequences.
+
+Failures during recovery are particularly important. An operator may be correct
+for a clean create or update path yet fail when:
+
+\begin{itemize}
+  \item the controller itself restarts mid-reconcile,
+  \item a cluster policy prevents creation of the next required object,
+  \item a stateful workload is left in a partial intermediate state,
+  \item cleanup and restart order matter.
+\end{itemize}
+
+The pilot benchmark focuses on two of these recovery axes:
+
+\begin{itemize}
+  \item \textbf{controller interruption}: deleting the operator pod during a
+  scale-up event;
+  \item \textbf{policy-constrained recovery}: using ResourceQuota to block a
+  scale-up and then removing the constraint to observe convergence.
+\end{itemize}
+
+\section{Benchmark Design}
+
+\subsection{Repository Layout}
+
+The benchmark is implemented as a standalone repository to avoid coupling the
+artifact to unrelated project code. The relevant components are:
+
+\begin{itemize}
+  \item \texttt{vendor/cluster-operator-main}: locally vendored RabbitMQ Cluster
+  Operator source tree;
+  \item benchmark runner script for the RabbitMQ scenarios;
+  \item \texttt{benchmark/reconcileunderpolicy/results/}: generated manifests,
+  scenario snapshots, and summary JSON.
+\end{itemize}
+
+\subsection{Scenarios}
+
+The pilot study runs the following three scenarios:
+
+\begin{enumerate}
+  \item \textbf{baseline\_create}: create a single-replica RabbitMQ cluster and
+  measure time to first healthy reconciliation;
+  \item \textbf{restart\_during\_scale}: scale from one to two replicas while
+  deleting the operator pod during reconciliation;
+  \item \textbf{quota\_blocked\_scale}: enforce a pod-count ResourceQuota to
+  block creation of the third pod during scale-up, then remove the quota and
+  measure time to converge to three healthy replicas.
+\end{enumerate}
+
+\subsection{Execution Environment}
+
+The experiment was run on a dedicated \texttt{kind} cluster named
+\texttt{reconcile-under-policy}. The cluster used Kubernetes v1.34.0 and the
+RabbitMQ Cluster Operator install was built locally with
+\texttt{kubectl kustomize} from the vendored operator repository. The managed
+RabbitMQ image was \texttt{rabbitmq:4.1.3-management}, and the benchmark
+overrode the workload resources to use:
+
+\begin{itemize}
+  \item CPU request: 200m
+  \item Memory request: 512Mi
+  \item CPU limit: 500m
+  \item Memory limit: 1Gi
+\end{itemize}
+
+These lower values were necessary because the operator defaults are too heavy
+for a single-node pilot cluster with three replicas.
+
+\subsection{Measurements}
+
+Each scenario records:
+
+\begin{itemize}
+  \item end-to-end completion time in seconds,
+  \item final number of ready replicas,
+  \item scenario-specific metadata, such as the deleted operator pod name or
+  the number of ready replicas observed while the quota constraint was active.
+\end{itemize}
+
+The current pilot uses one run per scenario. Therefore, the measurements should
+be interpreted as proof-of-execution and initial signals, not as statistically
+stable performance claims.
+
+\section{Results}
+
+Table~\ref{tab:results} summarizes the measured outcomes.
+
+\begin{table}[ht]
+\centering
+\caption{Pilot benchmark results for the RabbitMQ Cluster Operator}
+\label{tab:results}
+\begin{tabularx}{\linewidth}{@{}lcccY@{}}
+\toprule
+\textbf{Scenario} & \textbf{Success} & \textbf{Time (s)} & \textbf{Final Ready} & \textbf{Observation} \\
+\midrule
+baseline\_create & Yes & 64.83 & 1 & First healthy reconciliation from empty state \\
+restart\_during\_scale & Yes & 79.82 & 2 & Operator pod deleted during scale-up; cluster still converged \\
+quota\_blocked\_scale & Yes & 79.49 & 3 & Ready replicas stayed at 2 while quota blocked progress, then converged after quota removal \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Three observations stand out.
+
+\textbf{Baseline startup dominates the first scenario.} The baseline time of
+64.83\,s includes image startup, the operator-driven setup sequence, and the
+RabbitMQ init-container delay used by the operator-managed workload.
+
+\textbf{Operator restart did not prevent convergence.} In the second scenario,
+the benchmark deleted the operator pod during scale-up from one to two replicas.
+The cluster still reached the desired healthy state, indicating that the RabbitMQ
+operator tolerated this interruption for the tested workflow.
+
+\textbf{Policy-constrained recovery was observable and reversible.} In the third
+scenario, the benchmark applied a ResourceQuota that prevented creation of the
+third pod during scale-up to three replicas. While the quota was active, the
+cluster remained at two ready replicas. After the quota was removed, the
+operator progressed to the intended three-replica healthy state. This is
+exactly the class of behavior the benchmark is meant to expose.
+
+\section{Discussion}
+
+\subsection{What This Pilot Demonstrates}
+
+The main contribution of the pilot is methodological. It shows that a
+policy-constrained recovery benchmark for a real stateful operator can be:
+
+\begin{itemize}
+  \item implemented as a standalone repository,
+  \item executed end-to-end on a local \texttt{kind} cluster,
+  \item backed by machine-readable results and scenario snapshots,
+  \item used to observe both controller-interruption and policy-blocked recovery.
+\end{itemize}
+
+This is stronger than a purely conceptual proposal because the artifact now
+exists and produces real outputs. The benchmark also surfaced practical lessons:
+
+\begin{itemize}
+  \item local clusters require careful resource tuning;
+  \item preloading images materially improves repeatability;
+  \item policy constraints such as ResourceQuota are a useful way to create
+  realistic, operator-visible recovery stalls without modifying operator code.
+\end{itemize}
+
+\subsection{Limitations}
+
+This pilot is not yet a full publication-ready empirical study for a major
+systems venue.
+
+The most important limitations are:
+
+\begin{itemize}
+  \item only one operator was evaluated;
+  \item only three scenarios were executed;
+  \item each scenario was run once, so timing variance is unknown;
+  \item the cluster was a single-node \texttt{kind} environment rather than a
+  multi-node or production-like deployment.
+\end{itemize}
+
+Accordingly, the present results are best positioned as a pilot study, artifact
+demo, poster, or workshop paper foundation rather than a finished top-tier
+conference submission.
+
+\subsection{Next Steps}
+
+The benchmark can be extended in several straightforward ways:
+
+\begin{enumerate}
+  \item add repeated trials per scenario;
+  \item add deletion/cleanup recovery scenarios;
+  \item introduce a second operator, such as PostgreSQL or Redis;
+  \item generate comparative tables and simple charts from the JSON results;
+  \item evaluate more policy mechanisms, such as RBAC restriction or admission
+  rejection.
+\end{enumerate}
+
+\section{Related Work}
+
+Acto~\cite{acto} introduced automatic end-to-end testing for Kubernetes
+operators and demonstrated that state-centric testing can uncover many operator
+correctness and recovery bugs. Sieve~\cite{sieve} explored perturbation-based
+controller testing and emphasized the importance of intermediate, stale, and
+unobserved states. The NSDI 2026 reliability study~\cite{watchers} and the
+ISSTA 2024 operator bug study~\cite{issta-bugs} provide broader empirical
+motivation by showing that operator failures are common and operationally
+significant.
+
+The present work is much smaller in scope than those systems papers. Its value
+lies in making the policy-constrained recovery idea concrete with a runnable
+artifact and actual measured scenarios in a standalone repository.
+
+\section{Conclusion}
+
+This paper presented \emph{ReconcileUnderPolicy}, a pilot benchmark for
+policy-constrained recovery in the RabbitMQ Cluster Operator. The benchmark was
+implemented, executed, and produced real results across three scenarios:
+baseline creation, operator-restart scale-up, and ResourceQuota-constrained
+recovery. All three scenarios converged successfully, with measured end-to-end
+times between 64.83\,s and 79.82\,s.
+
+The pilot does not yet establish a broad empirical characterization of
+stateful Kubernetes operator recovery. What it does establish is that the
+benchmarking approach is feasible, reproducible, and capable of observing
+policy-aware recovery behavior on a real operator. That makes it a practical
+foundation for a more complete multi-operator study.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

@@ -1,0 +1,187 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"postgresql.cnpg.io/v1","kind":"Cluster","metadata":{"annotations":{},"name":"hello-world","namespace":"rup-cnpg"},"spec":{"imageName":"ghcr.io/cloudnative-pg/postgresql:17","instances":1,"primaryUpdateStrategy":"unsupervised","resources":{"limits":{"cpu":"500m","memory":"1Gi"},"requests":{"cpu":"200m","memory":"512Mi"}},"storage":{"size":"1Gi"}}}
+  creationTimestamp: "2026-04-26T17:53:55Z"
+  generation: 1
+  name: hello-world
+  namespace: rup-cnpg
+  resourceVersion: "2827"
+  uid: 309a862b-62d8-455b-9352-9d49f0661a4c
+spec:
+  affinity:
+    podAntiAffinityType: preferred
+  bootstrap:
+    initdb:
+      database: app
+      encoding: UTF8
+      localeCType: C
+      localeCollate: C
+      owner: app
+  enablePDB: true
+  enableSuperuserAccess: false
+  failoverDelay: 0
+  imageName: ghcr.io/cloudnative-pg/postgresql:17
+  instances: 1
+  logLevel: info
+  maxSyncReplicas: 0
+  minSyncReplicas: 0
+  monitoring:
+    customQueriesConfigMap:
+    - key: queries
+      name: cnpg-default-monitoring
+    disableDefaultQueries: false
+    enablePodMonitor: false
+  postgresGID: 26
+  postgresUID: 26
+  postgresql:
+    parameters:
+      archive_mode: "on"
+      archive_timeout: 5min
+      dynamic_shared_memory_type: posix
+      full_page_writes: "on"
+      log_destination: csvlog
+      log_directory: /controller/log
+      log_filename: postgres
+      log_rotation_age: "0"
+      log_rotation_size: "0"
+      log_truncate_on_rotation: "false"
+      logging_collector: "on"
+      max_parallel_workers: "32"
+      max_replication_slots: "32"
+      max_worker_processes: "32"
+      shared_memory_type: mmap
+      shared_preload_libraries: ""
+      ssl_max_protocol_version: TLSv1.3
+      ssl_min_protocol_version: TLSv1.3
+      wal_keep_size: 512MB
+      wal_level: logical
+      wal_log_hints: "on"
+      wal_receiver_timeout: 5s
+      wal_sender_timeout: 5s
+    syncReplicaElectionConstraint:
+      enabled: false
+  primaryUpdateMethod: restart
+  primaryUpdateStrategy: unsupervised
+  probes:
+    liveness:
+      isolationCheck:
+        connectionTimeout: 1000
+        enabled: true
+        requestTimeout: 1000
+  replicationSlots:
+    highAvailability:
+      enabled: true
+      slotPrefix: _cnpg_
+    synchronizeReplicas:
+      enabled: true
+    updateInterval: 30
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  smartShutdownTimeout: 180
+  startDelay: 3600
+  stopDelay: 1800
+  storage:
+    resizeInUseVolumes: true
+    size: 1Gi
+  switchoverDelay: 3600
+status:
+  availableArchitectures:
+  - goArch: amd64
+    hash: b77f8f908fdc909122fe24fa164f8247c0689c4ca8c01ccef07fc50e7be8f6f1
+  - goArch: arm64
+    hash: 97fa01dc1c6abcd7f64a51d16f2e4ef9c7bb8d4d842e01adc9d07060e6b84157
+  certificates:
+    clientCASecret: hello-world-ca
+    expirations:
+      hello-world-ca: 2026-07-25 17:48:55 +0000 UTC
+      hello-world-replication: 2026-07-25 17:48:55 +0000 UTC
+      hello-world-server: 2026-07-25 17:48:55 +0000 UTC
+    replicationTLSSecret: hello-world-replication
+    serverAltDNSNames:
+    - hello-world-rw
+    - hello-world-rw.rup-cnpg
+    - hello-world-rw.rup-cnpg.svc
+    - hello-world-rw.rup-cnpg.svc.cluster.local
+    - hello-world-r
+    - hello-world-r.rup-cnpg
+    - hello-world-r.rup-cnpg.svc
+    - hello-world-r.rup-cnpg.svc.cluster.local
+    - hello-world-ro
+    - hello-world-ro.rup-cnpg
+    - hello-world-ro.rup-cnpg.svc
+    - hello-world-ro.rup-cnpg.svc.cluster.local
+    serverCASecret: hello-world-ca
+    serverTLSSecret: hello-world-server
+  cloudNativePGCommitHash: 23eae00cd
+  cloudNativePGOperatorHash: b77f8f908fdc909122fe24fa164f8247c0689c4ca8c01ccef07fc50e7be8f6f1
+  conditions:
+  - lastTransitionTime: "2026-04-26T17:54:10Z"
+    message: A single, unique system ID was found across reporting instances.
+    reason: Unique
+    status: "True"
+    type: ConsistentSystemID
+  - lastTransitionTime: "2026-04-26T17:54:17Z"
+    message: Cluster is Ready
+    reason: ClusterIsReady
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2026-04-26T17:54:09Z"
+    message: Continuous archiving is working
+    reason: ContinuousArchivingSuccess
+    status: "True"
+    type: ContinuousArchiving
+  configMapResourceVersion:
+    metrics:
+      cnpg-default-monitoring: "2690"
+  currentPrimary: hello-world-1
+  currentPrimaryTimestamp: "2026-04-26T17:54:08.752003Z"
+  healthyPVC:
+  - hello-world-1
+  image: ghcr.io/cloudnative-pg/postgresql:17
+  instanceNames:
+  - hello-world-1
+  instances: 1
+  instancesReportedState:
+    hello-world-1:
+      ip: 10.244.1.12
+      isPrimary: true
+      timeLineID: 1
+  instancesStatus:
+    healthy:
+    - hello-world-1
+  latestGeneratedNode: 1
+  managedRolesStatus: {}
+  pgDataImageInfo:
+    image: ghcr.io/cloudnative-pg/postgresql:17
+    majorVersion: 17
+  phase: Cluster in healthy state
+  poolerIntegrations:
+    pgBouncerIntegration: {}
+  pvcCount: 1
+  readService: hello-world-r
+  readyInstances: 1
+  secretsResourceVersion:
+    applicationSecretVersion: "2665"
+    clientCaSecretVersion: "2662"
+    replicationSecretVersion: "2664"
+    serverCaSecretVersion: "2662"
+    serverSecretVersion: "2663"
+  switchReplicaClusterStatus: {}
+  systemID: "7633127725056552986"
+  targetPrimary: hello-world-1
+  targetPrimaryTimestamp: "2026-04-26T17:53:55.743976Z"
+  timelineID: 1
+  topology:
+    instances:
+      hello-world-1: {}
+    nodesUsed: 1
+    successfullyExtracted: true
+  writeService: hello-world-rw

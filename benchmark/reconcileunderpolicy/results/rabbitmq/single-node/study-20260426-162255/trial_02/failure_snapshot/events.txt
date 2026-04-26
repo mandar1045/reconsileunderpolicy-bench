@@ -1,0 +1,122 @@
+LAST SEEN   TYPE      REASON                       OBJECT                                                   MESSAGE
+15m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Pod hello-world-server-0 in StatefulSet hello-world-server successful
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-nodes of Type *v1.Service
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-plugins-conf of Type *v1.ConfigMap
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              (combined from similar events): created resource hello-world-server of Type *v1.StatefulSet
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-default-user of Type *v1.Secret
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.ServiceAccount
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-peer-discovery of Type *v1.Role
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.RoleBinding
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-erlang-cookie of Type *v1.Secret
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server-conf of Type *v1.ConfigMap
+15m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Claim persistence-hello-world-server-0 Pod hello-world-server-0 in StatefulSet hello-world-server success
+15m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world of Type *v1.Service
+15m         Normal    WaitForFirstConsumer         persistentvolumeclaim/persistence-hello-world-server-0   waiting for first consumer to be created before binding
+15m         Normal    Provisioning                 persistentvolumeclaim/persistence-hello-world-server-0   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-0"
+15m         Normal    ExternalProvisioning         persistentvolumeclaim/persistence-hello-world-server-0   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+15m         Normal    ProvisioningSucceeded        persistentvolumeclaim/persistence-hello-world-server-0   Successfully provisioned volume pvc-5a3a0232-db9a-44e1-99b4-f728034aab9b
+15m         Normal    Scheduled                    pod/hello-world-server-0                                 Successfully assigned rup-rabbitmq/hello-world-server-0 to reconcile-under-policy-single-node-control-plane
+15m         Normal    Pulling                      pod/hello-world-server-0                                 Pulling image "rabbitmq:4.1.3-management"
+15m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+15m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service
+15m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-server of Type *v1.StatefulSet
+13m         Normal    Created                      pod/hello-world-server-0                                 Created container: setup-container
+13m         Normal    Pulled                       pod/hello-world-server-0                                 Successfully pulled image "rabbitmq:4.1.3-management" in 1m47.172s (1m47.172s including waiting). Image size: 127830906 bytes.
+13m         Normal    Started                      pod/hello-world-server-0                                 Started container setup-container
+13m         Normal    Started                      pod/hello-world-server-0                                 Started container rabbitmq
+13m         Normal    Created                      pod/hello-world-server-0                                 Created container: rabbitmq
+13m         Normal    Pulled                       pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine
+12m         Normal    Provisioning                 persistentvolumeclaim/persistence-hello-world-server-1   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-1"
+12m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-server-conf of Type *v1.ConfigMap
+12m         Normal    WaitForFirstConsumer         persistentvolumeclaim/persistence-hello-world-server-1   waiting for first consumer to be created before binding
+12m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Pod hello-world-server-1 in StatefulSet hello-world-server successful
+12m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Claim persistence-hello-world-server-1 Pod hello-world-server-1 in StatefulSet hello-world-server success
+12m         Normal    ExternalProvisioning         persistentvolumeclaim/persistence-hello-world-server-1   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+12m         Normal    ProvisioningSucceeded        persistentvolumeclaim/persistence-hello-world-server-1   Successfully provisioned volume pvc-876022bc-b4fb-432f-842d-9a661136f34b
+12m         Normal    Created                      pod/hello-world-server-1                                 Created container: setup-container
+12m         Normal    Pulled                       pod/hello-world-server-1                                 Container image "rabbitmq:4.1.3-management" already present on machine
+12m         Normal    Scheduled                    pod/hello-world-server-1                                 Successfully assigned rup-rabbitmq/hello-world-server-1 to reconcile-under-policy-single-node-control-plane
+12m         Normal    Started                      pod/hello-world-server-1                                 Started container setup-container
+11m         Normal    Started                      pod/hello-world-server-1                                 Started container rabbitmq
+11m         Normal    Pulled                       pod/hello-world-server-1                                 Container image "rabbitmq:4.1.3-management" already present on machine
+11m         Normal    Created                      pod/hello-world-server-1                                 Created container: rabbitmq
+11m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+11m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-server of Type *v1.StatefulSet
+11m         Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service
+11m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Claim persistence-hello-world-server-2 Pod hello-world-server-2 in StatefulSet hello-world-server success
+11m         Warning   FailedCreate                 statefulset/hello-world-server                           create Pod hello-world-server-2 in StatefulSet hello-world-server failed error: pods "hello-world-server-2" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+11m         Normal    WaitForFirstConsumer         persistentvolumeclaim/persistence-hello-world-server-2   waiting for first consumer to be created before binding
+11m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Pod hello-world-server-2 in StatefulSet hello-world-server successful
+11m         Normal    ExternalProvisioning         persistentvolumeclaim/persistence-hello-world-server-2   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+11m         Normal    Provisioning                 persistentvolumeclaim/persistence-hello-world-server-2   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-2"
+11m         Normal    ProvisioningSucceeded        persistentvolumeclaim/persistence-hello-world-server-2   Successfully provisioned volume pvc-3950fda2-5c48-4737-8e67-1c836fd10bf9
+11m         Normal    Created                      pod/hello-world-server-2                                 Created container: setup-container
+11m         Normal    Scheduled                    pod/hello-world-server-2                                 Successfully assigned rup-rabbitmq/hello-world-server-2 to reconcile-under-policy-single-node-control-plane
+11m         Normal    Pulled                       pod/hello-world-server-2                                 Container image "rabbitmq:4.1.3-management" already present on machine
+11m         Normal    Started                      pod/hello-world-server-2                                 Started container setup-container
+10m         Normal    Created                      pod/hello-world-server-2                                 Created container: rabbitmq
+10m         Normal    Pulled                       pod/hello-world-server-2                                 Container image "rabbitmq:4.1.3-management" already present on machine
+10m         Normal    Started                      pod/hello-world-server-2                                 Started container rabbitmq
+10m         Normal    Killing                      pod/hello-world-server-1                                 Stopping container rabbitmq
+10m         Normal    Killing                      pod/hello-world-server-0                                 Stopping container rabbitmq
+10m         Normal    Killing                      pod/hello-world-server-2                                 Stopping container rabbitmq
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-peer-discovery of Type *v1.Role
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server-conf of Type *v1.ConfigMap
+10m         Warning   FailedMount                  pod/hello-world-server-2                                 MountVolume.SetUp failed for volume "rabbitmq-confd" : [configmap "hello-world-server-conf" not found, secret "hello-world-default-user" not found]
+10m         Warning   FailedMount                  pod/hello-world-server-2                                 MountVolume.SetUp failed for volume "erlang-cookie-secret" : secret "hello-world-erlang-cookie" not found
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              (combined from similar events): created resource hello-world-server of Type *v1.StatefulSet
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.RoleBinding
+10m         Warning   FailedMount                  pod/hello-world-server-2                                 MountVolume.SetUp failed for volume "plugins-conf" : configmap "hello-world-plugins-conf" not found
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.ServiceAccount
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-plugins-conf of Type *v1.ConfigMap
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-default-user of Type *v1.Secret
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-erlang-cookie of Type *v1.Secret
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-nodes of Type *v1.Service
+10m         Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world of Type *v1.Service
+10m         Normal    WaitForFirstConsumer         persistentvolumeclaim/persistence-hello-world-server-0   waiting for first consumer to be created before binding
+10m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Pod hello-world-server-0 in StatefulSet hello-world-server successful
+10m         Normal    SuccessfulCreate             statefulset/hello-world-server                           create Claim persistence-hello-world-server-0 Pod hello-world-server-0 in StatefulSet hello-world-server success
+10m         Warning   FailedCreate                 statefulset/hello-world-server                           create Pod hello-world-server-0 in StatefulSet hello-world-server failed error: pvc persistence-hello-world-server-0 is being deleted
+10m         Normal    Provisioning                 persistentvolumeclaim/persistence-hello-world-server-0   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-0"
+10m         Normal    ExternalProvisioning         persistentvolumeclaim/persistence-hello-world-server-0   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+10m         Normal    ProvisioningSucceeded        persistentvolumeclaim/persistence-hello-world-server-0   Successfully provisioned volume pvc-976e69ef-0b70-4be0-a37a-d87990bbd068
+10m         Normal    Created                      pod/hello-world-server-0                                 Created container: setup-container
+10m         Normal    Pulled                       pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine
+10m         Normal    Scheduled                    pod/hello-world-server-0                                 Successfully assigned rup-rabbitmq/hello-world-server-0 to reconcile-under-policy-single-node-control-plane
+10m         Normal    Started                      pod/hello-world-server-0                                 Started container setup-container
+9m44s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service
+9m44s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-server of Type *v1.StatefulSet
+9m44s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+9m34s       Normal    Created                      pod/hello-world-server-0                                 Created container: rabbitmq
+9m34s       Normal    Pulled                       pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine
+9m34s       Normal    Started                      pod/hello-world-server-0                                 Started container rabbitmq
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-plugins-conf of Type *v1.ConfigMap
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-peer-discovery of Type *v1.Role
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.RoleBinding
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-nodes of Type *v1.Service
+9m14s       Normal    Killing                      pod/hello-world-server-0                                 Stopping container rabbitmq
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server of Type *v1.ServiceAccount
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-server-conf of Type *v1.ConfigMap
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-default-user of Type *v1.Secret
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world-erlang-cookie of Type *v1.Secret
+9m14s       Normal    SuccessfulCreate             rabbitmqcluster/hello-world                              created resource hello-world of Type *v1.Service
+9m13s       Warning   FailedReconcilePersistence   rabbitmqcluster/hello-world                              Failed to scale PVCs: failed to update PersistentVolumeClaim persistence-hello-world-server-0: persistentvolumeclaims "persistence-hello-world-server-0" is forbidden: only dynamically provisioned pvc can be resized and the storageclass that provisions the pvc must support resize
+9m13s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service
+9m13s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+9m10s       Normal    SuccessfulCreate             statefulset/hello-world-server                           create Claim persistence-hello-world-server-0 Pod hello-world-server-0 in StatefulSet hello-world-server success
+9m10s       Normal    SuccessfulCreate             statefulset/hello-world-server                           create Pod hello-world-server-0 in StatefulSet hello-world-server successful
+9m10s       Normal    Provisioning                 persistentvolumeclaim/persistence-hello-world-server-0   External provisioner is provisioning volume for claim "rup-rabbitmq/persistence-hello-world-server-0"
+9m10s       Normal    WaitForFirstConsumer         persistentvolumeclaim/persistence-hello-world-server-0   waiting for first consumer to be created before binding
+9m9s        Normal    ExternalProvisioning         persistentvolumeclaim/persistence-hello-world-server-0   Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+9m7s        Normal    ProvisioningSucceeded        persistentvolumeclaim/persistence-hello-world-server-0   Successfully provisioned volume pvc-068390ed-7984-40ac-a959-07b35f9d134a
+9m6s        Normal    Scheduled                    pod/hello-world-server-0                                 Successfully assigned rup-rabbitmq/hello-world-server-0 to reconcile-under-policy-single-node-control-plane
+9m5s        Normal    Pulled                       pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine
+9m5s        Normal    Created                      pod/hello-world-server-0                                 Created container: setup-container
+9m          Normal    Started                      pod/hello-world-server-0                                 Started container setup-container
+8m28s       Normal    Created                      pod/hello-world-server-0                                 Created container: rabbitmq
+8m28s       Normal    Started                      pod/hello-world-server-0                                 Started container rabbitmq
+8m28s       Normal    Pulled                       pod/hello-world-server-0                                 Container image "rabbitmq:4.1.3-management" already present on machine
+8m15s       Warning   FailedReconcilePersistence   rabbitmqcluster/hello-world                              Failed to scale PVCs: shrinking persistent volumes is not supported
+7m43s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world of Type *v1.Service
+2m26s       Warning   FailedReconcilePersistence   rabbitmqcluster/hello-world                              Failed to scale PVCs: shrinking persistent volumes is not supported
+2m26s       Normal    SuccessfulUpdate             rabbitmqcluster/hello-world                              updated resource hello-world-nodes of Type *v1.Service

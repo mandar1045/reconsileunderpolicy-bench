@@ -1,0 +1,16 @@
+{
+  "trial": 2,
+  "started_at": "2026-04-26T16:30:16.506151+00:00",
+  "scenarios": [
+    {
+      "name": "baseline_create",
+      "success": true,
+      "duration_seconds": 61.05,
+      "final_ready_replicas": 1,
+      "notes": "Created a one-node RabbitMQ Cluster Operator cluster and measured time to first healthy reconciliation."
+    }
+  ],
+  "success": false,
+  "error": "Timed out waiting for 2 ready replicas",
+  "completed_at": "2026-04-26T16:39:31.903927+00:00"
+}

@@ -1,0 +1,203 @@
+{
+  "started_at": "2026-04-26T16:41:00.964771+00:00",
+  "study_dir": "/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/rabbitmq/single-node/study-20260426-164100",
+  "cluster_context": "kind-reconcile-under-policy-single-node",
+  "environment": "single-node",
+  "environment_display_name": "Single-node kind",
+  "environment_node_count": 1,
+  "namespace": "rup-rabbitmq",
+  "operator_namespace": "rabbitmq-system",
+  "operator": "RabbitMQ Cluster Operator",
+  "operator_key": "rabbitmq",
+  "trials_requested": 3,
+  "scenario_order": [
+    "baseline_create",
+    "restart_during_scale",
+    "quota_blocked_scale",
+    "delete_and_recreate"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "started_at": "2026-04-26T16:41:45.981023+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 174.8,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node RabbitMQ Cluster Operator cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 78.71,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "rabbitmq-cluster-operator-7f6cdbd776-nh25f",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 79.37,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 59.41,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T16:48:19.687719+00:00"
+    },
+    {
+      "trial": 2,
+      "started_at": "2026-04-26T16:48:19.687982+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 175.27,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node RabbitMQ Cluster Operator cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 77.61,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "rabbitmq-cluster-operator-7f6cdbd776-shzkb",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 81.77,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 59.57,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T16:54:55.455631+00:00"
+    },
+    {
+      "trial": 3,
+      "started_at": "2026-04-26T16:54:55.457972+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 174.93,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node RabbitMQ Cluster Operator cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 75.17,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "rabbitmq-cluster-operator-7f6cdbd776-l22r2",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 79.54,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 59.5,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T17:01:26.344117+00:00"
+    }
+  ],
+  "aggregates": [
+    {
+      "scenario": "baseline_create",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 175.0,
+      "median_seconds": 174.93,
+      "min_seconds": 174.8,
+      "max_seconds": 175.27,
+      "stdev_seconds": 0.2,
+      "durations_seconds": [
+        174.8,
+        175.27,
+        174.93
+      ]
+    },
+    {
+      "scenario": "restart_during_scale",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 77.16,
+      "median_seconds": 77.61,
+      "min_seconds": 75.17,
+      "max_seconds": 78.71,
+      "stdev_seconds": 1.48,
+      "durations_seconds": [
+        78.71,
+        77.61,
+        75.17
+      ]
+    },
+    {
+      "scenario": "quota_blocked_scale",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 80.23,
+      "median_seconds": 79.54,
+      "min_seconds": 79.37,
+      "max_seconds": 81.77,
+      "stdev_seconds": 1.09,
+      "durations_seconds": [
+        79.37,
+        81.77,
+        79.54
+      ]
+    },
+    {
+      "scenario": "delete_and_recreate",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 59.49,
+      "median_seconds": 59.5,
+      "min_seconds": 59.41,
+      "max_seconds": 59.57,
+      "stdev_seconds": 0.07,
+      "durations_seconds": [
+        59.41,
+        59.57,
+        59.5
+      ]
+    }
+  ],
+  "completed_at": "2026-04-26T17:01:26.344732+00:00",
+  "success": true
+}

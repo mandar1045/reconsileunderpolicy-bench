@@ -1,0 +1,69 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rabbitmq.com/v1beta1","kind":"RabbitmqCluster","metadata":{"annotations":{},"name":"hello-world","namespace":"rup-rabbitmq"},"spec":{"persistence":{"storage":"2Gi","storageClassName":"standard"},"replicas":1,"resources":{"limits":{"cpu":"500m","memory":"1Gi"},"requests":{"cpu":"200m","memory":"512Mi"}}}}
+  creationTimestamp: "2026-04-26T16:30:17Z"
+  finalizers:
+  - deletion.finalizers.rabbitmqclusters.rabbitmq.com
+  generation: 4
+  name: hello-world
+  namespace: rup-rabbitmq
+  resourceVersion: "2076"
+  uid: 8958b2bd-b71f-4f6c-b404-da2b1258cc8c
+spec:
+  delayStartSeconds: 30
+  image: rabbitmq:4.1.3-management
+  override: {}
+  persistence:
+    storage: 2Gi
+    storageClassName: standard
+  rabbitmq: {}
+  replicas: 2
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  secretBackend:
+    externalSecret:
+      name: ""
+  service:
+    type: ClusterIP
+  terminationGracePeriodSeconds: 604800
+  tls: {}
+status:
+  binding:
+    name: hello-world-default-user
+  conditions:
+  - lastTransitionTime: "2026-04-26T16:31:16Z"
+    reason: AllPodsAreReady
+    status: "True"
+    type: AllReplicasReady
+  - lastTransitionTime: "2026-04-26T16:30:35Z"
+    reason: AtLeastOneEndpointAvailable
+    status: "True"
+    type: ClusterAvailable
+  - lastTransitionTime: "2026-04-26T16:30:21Z"
+    reason: NoWarnings
+    status: "True"
+    type: NoWarnings
+  - lastTransitionTime: "2026-04-26T16:30:17Z"
+    message: shrinking persistent volumes is not supported
+    reason: FailedReconcilePVC
+    status: "False"
+    type: ReconcileSuccess
+  defaultUser:
+    secretReference:
+      keys:
+        password: password
+        username: username
+      name: hello-world-default-user
+      namespace: rup-rabbitmq
+    serviceReference:
+      name: hello-world
+      namespace: rup-rabbitmq
+  quorumStatus: unavailable

@@ -1,0 +1,2 @@
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE   VOLUMEMODE
+hello-world-1   Bound    pvc-cbc275bc-8854-4cf8-8106-2b9ed31a3b6f   1Gi        RWO            standard       <unset>                 23s   Filesystem

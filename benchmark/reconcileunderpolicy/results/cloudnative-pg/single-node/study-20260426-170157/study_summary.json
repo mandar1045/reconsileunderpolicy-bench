@@ -1,0 +1,73 @@
+{
+  "started_at": "2026-04-26T17:01:57.727851+00:00",
+  "study_dir": "/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/cloudnative-pg/single-node/study-20260426-170157",
+  "cluster_context": "kind-reconcile-under-policy-single-node",
+  "environment": "single-node",
+  "environment_display_name": "Single-node kind",
+  "environment_node_count": 1,
+  "namespace": "rup-cnpg",
+  "operator_namespace": "cnpg-system",
+  "operator": "CloudNativePG",
+  "operator_key": "cloudnative-pg",
+  "trials_requested": 3,
+  "scenario_order": [
+    "baseline_create",
+    "restart_during_scale",
+    "quota_blocked_scale",
+    "delete_and_recreate"
+  ],
+  "trials": [],
+  "completed_at": "2026-04-26T17:01:58.463984+00:00",
+  "success": false,
+  "error": "Command failed (kubectl --context kind-reconcile-under-policy-single-node apply -f /home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/cloudnative-pg/single-node/study-20260426-170157/cloudnative-pg-operator-install.yaml):\nSTDOUT:\nnamespace/cnpg-system created\ncustomresourcedefinition.apiextensions.k8s.io/backups.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/clusterimagecatalogs.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/databases.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/failoverquorums.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/imagecatalogs.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/publications.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/scheduledbackups.postgresql.cnpg.io created\ncustomresourcedefinition.apiextensions.k8s.io/subscriptions.postgresql.cnpg.io created\nserviceaccount/cnpg-manager created\nclusterrole.rbac.authorization.k8s.io/cnpg-database-editor-role created\nclusterrole.rbac.authorization.k8s.io/cnpg-database-viewer-role created\nclusterrole.rbac.authorization.k8s.io/cnpg-manager created\nclusterrole.rbac.authorization.k8s.io/cnpg-publication-editor-role created\nclusterrole.rbac.authorization.k8s.io/cnpg-publication-viewer-role created\nclusterrole.rbac.authorization.k8s.io/cnpg-subscription-editor-role created\nclusterrole.rbac.authorization.k8s.io/cnpg-subscription-viewer-role created\nclusterrolebinding.rbac.authorization.k8s.io/cnpg-manager-rolebinding created\nconfigmap/cnpg-default-monitoring created\nservice/cnpg-webhook-service created\ndeployment.apps/cnpg-controller-manager created\nmutatingwebhookconfiguration.admissionregistration.k8s.io/cnpg-mutating-webhook-configuration created\nvalidatingwebhookconfiguration.admissionregistration.k8s.io/cnpg-validating-webhook-configuration created\n\nSTDERR:\nWarning: unrecognized format \"int64\"\nError from server (Invalid): error when creating \"/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/cloudnative-pg/single-node/study-20260426-170157/cloudnative-pg-operator-install.yaml\": CustomResourceDefinition.apiextensions.k8s.io \"clusters.postgresql.cnpg.io\" is invalid: metadata.annotations: Too long: may not be more than 262144 bytes\nError from server (Invalid): error when creating \"/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/cloudnative-pg/single-node/study-20260426-170157/cloudnative-pg-operator-install.yaml\": CustomResourceDefinition.apiextensions.k8s.io \"poolers.postgresql.cnpg.io\" is invalid: metadata.annotations: Too long: may not be more than 262144 bytes\n",
+  "aggregates": [
+    {
+      "scenario": "baseline_create",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "restart_during_scale",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "quota_blocked_scale",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "delete_and_recreate",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    }
+  ]
+}

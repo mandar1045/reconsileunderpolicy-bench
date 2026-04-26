@@ -1,0 +1,69 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rabbitmq.com/v1beta1","kind":"RabbitmqCluster","metadata":{"annotations":{},"name":"hello-world","namespace":"rup-rabbitmq"},"spec":{"persistence":{"storage":"2Gi","storageClassName":"standard"},"replicas":1,"resources":{"limits":{"cpu":"500m","memory":"1Gi"},"requests":{"cpu":"200m","memory":"512Mi"}}}}
+  creationTimestamp: "2026-04-26T16:50:15Z"
+  finalizers:
+  - deletion.finalizers.rabbitmqclusters.rabbitmq.com
+  generation: 2
+  name: hello-world
+  namespace: rup-rabbitmq
+  resourceVersion: "2224"
+  uid: 3e779ffd-4f30-4f6a-86ae-8e557adadff9
+spec:
+  delayStartSeconds: 30
+  image: rabbitmq:4.1.3-management
+  override: {}
+  persistence:
+    storage: 2Gi
+    storageClassName: standard
+  rabbitmq: {}
+  replicas: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 200m
+      memory: 512Mi
+  secretBackend:
+    externalSecret:
+      name: ""
+  service:
+    type: ClusterIP
+  terminationGracePeriodSeconds: 604800
+  tls: {}
+status:
+  binding:
+    name: hello-world-default-user
+  conditions:
+  - lastTransitionTime: "2026-04-26T16:51:13Z"
+    reason: AllPodsAreReady
+    status: "True"
+    type: AllReplicasReady
+  - lastTransitionTime: "2026-04-26T16:50:31Z"
+    reason: AtLeastOneEndpointAvailable
+    status: "True"
+    type: ClusterAvailable
+  - lastTransitionTime: "2026-04-26T16:50:15Z"
+    message: RabbitMQ container memory resource request and limit must be equal
+    reason: MemoryRequestAndLimitDifferent
+    status: "False"
+    type: NoWarnings
+  - lastTransitionTime: "2026-04-26T16:50:15Z"
+    reason: Initialising
+    status: Unknown
+    type: ReconcileSuccess
+  defaultUser:
+    secretReference:
+      keys:
+        password: password
+        username: username
+      name: hello-world-default-user
+      namespace: rup-rabbitmq
+    serviceReference:
+      name: hello-world
+      namespace: rup-rabbitmq
+  quorumStatus: ok

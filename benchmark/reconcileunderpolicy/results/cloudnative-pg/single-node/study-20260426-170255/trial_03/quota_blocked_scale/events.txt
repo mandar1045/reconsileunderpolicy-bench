@@ -1,0 +1,284 @@
+LAST SEEN   TYPE      REASON                        OBJECT                                    MESSAGE
+10m         Normal    NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+10m         Normal    CreatingRole                  cluster/hello-world                       Creating Cluster Role
+10m         Normal    CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+10m         Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+10m         Normal    SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-bct7s
+10m         Normal    CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+10m         Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+10m         Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+10m         Normal    Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+10m         Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-7da63fdb-018f-4683-b801-ca9f17a62b11
+10m         Normal    Started                       pod/hello-world-1-initdb-bct7s            Started container bootstrap-controller
+10m         Normal    Created                       pod/hello-world-1-initdb-bct7s            Created container: bootstrap-controller
+10m         Normal    Pulled                        pod/hello-world-1-initdb-bct7s            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+10m         Normal    Scheduled                     pod/hello-world-1-initdb-bct7s            Successfully assigned rup-cnpg/hello-world-1-initdb-bct7s to reconcile-under-policy-single-node-control-plane
+10m         Normal    Pulling                       pod/hello-world-1-initdb-bct7s            Pulling image "ghcr.io/cloudnative-pg/postgresql:17"
+6m49s       Normal    Pulled                        pod/hello-world-1-initdb-bct7s            Successfully pulled image "ghcr.io/cloudnative-pg/postgresql:17" in 3m28.203s (3m28.203s including waiting). Image size: 256044486 bytes.
+6m49s       Normal    Created                       pod/hello-world-1-initdb-bct7s            Created container: initdb
+6m48s       Normal    Started                       pod/hello-world-1-initdb-bct7s            Started container initdb
+6m44s       Normal    Created                       pod/hello-world-1                         Created container: bootstrap-controller
+6m44s       Normal    Completed                     job/hello-world-1-initdb                  Job completed
+6m44s       Normal    Started                       pod/hello-world-1                         Started container bootstrap-controller
+6m44s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+6m44s       Normal    Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+6m43s       Normal    Started                       pod/hello-world-1                         Started container postgres
+6m43s       Normal    Created                       pod/hello-world-1                         Created container: postgres
+6m43s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+6m26s       Normal    SuccessfulCreate              job/hello-world-2-join                    Created pod: hello-world-2-join-kctwx
+6m26s       Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-2
+6m26s       Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-2       waiting for first consumer to be created before binding
+6m26s       Normal    Provisioning                  persistentvolumeclaim/hello-world-2       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-2"
+6m24s       Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-2       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+6m23s       Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-2       Successfully provisioned volume pvc-706f49e2-ba63-4282-be2e-3640259c54d0
+6m22s       Normal    Pulled                        pod/hello-world-2-join-kctwx              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+6m22s       Normal    Scheduled                     pod/hello-world-2-join-kctwx              Successfully assigned rup-cnpg/hello-world-2-join-kctwx to reconcile-under-policy-single-node-control-plane
+6m22s       Normal    Created                       pod/hello-world-2-join-kctwx              Created container: bootstrap-controller
+6m22s       Normal    Started                       pod/hello-world-2-join-kctwx              Started container bootstrap-controller
+6m21s       Normal    Pulled                        pod/hello-world-2-join-kctwx              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+6m21s       Normal    Started                       pod/hello-world-2-join-kctwx              Started container join
+6m21s       Normal    Created                       pod/hello-world-2-join-kctwx              Created container: join
+6m16s       Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+6m16s       Normal    Created                       pod/hello-world-2                         Created container: bootstrap-controller
+6m16s       Normal    Scheduled                     pod/hello-world-2                         Successfully assigned rup-cnpg/hello-world-2 to reconcile-under-policy-single-node-control-plane
+6m16s       Normal    Completed                     job/hello-world-2-join                    Job completed
+6m15s       Normal    Started                       pod/hello-world-2                         Started container bootstrap-controller
+6m15s       Normal    Started                       pod/hello-world-2                         Started container postgres
+6m15s       Normal    Created                       pod/hello-world-2                         Created container: postgres
+6m15s       Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+6m3s        Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world
+6m3s        Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-3
+6m3s        Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-vgc52" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+6m2s        Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-9fwfv" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+6m          Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-2fh8w" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+5m56s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-46l9g" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+5m48s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-hbfrs" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+5m39s       Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-3       waiting for first consumer to be created before binding
+5m32s       Normal    SuccessfulCreate              job/hello-world-3-join                    Created pod: hello-world-3-join-9lxnp
+5m32s       Normal    Provisioning                  persistentvolumeclaim/hello-world-3       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-3"
+5m32s       Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-3       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+5m30s       Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-3       Successfully provisioned volume pvc-7c3f2794-caa8-4344-899e-6f945b7334d2
+5m29s       Normal    Scheduled                     pod/hello-world-3-join-9lxnp              Successfully assigned rup-cnpg/hello-world-3-join-9lxnp to reconcile-under-policy-single-node-control-plane
+5m29s       Normal    Created                       pod/hello-world-3-join-9lxnp              Created container: bootstrap-controller
+5m29s       Normal    Pulled                        pod/hello-world-3-join-9lxnp              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+5m28s       Normal    Started                       pod/hello-world-3-join-9lxnp              Started container join
+5m28s       Normal    Created                       pod/hello-world-3-join-9lxnp              Created container: join
+5m28s       Normal    Pulled                        pod/hello-world-3-join-9lxnp              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+5m28s       Normal    Started                       pod/hello-world-3-join-9lxnp              Started container bootstrap-controller
+5m25s       Normal    Completed                     job/hello-world-3-join                    Job completed
+5m24s       Normal    Scheduled                     pod/hello-world-3                         Successfully assigned rup-cnpg/hello-world-3 to reconcile-under-policy-single-node-control-plane
+5m24s       Normal    Started                       pod/hello-world-3                         Started container bootstrap-controller
+5m24s       Normal    Created                       pod/hello-world-3                         Created container: bootstrap-controller
+5m24s       Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+5m23s       Normal    Started                       pod/hello-world-3                         Started container postgres
+5m23s       Normal    Created                       pod/hello-world-3                         Created container: postgres
+5m23s       Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+5m13s       Normal    Killing                       pod/hello-world-1                         Stopping container postgres
+5m13s       Normal    Killing                       pod/hello-world-2                         Stopping container postgres
+5m12s       Normal    Killing                       pod/hello-world-3                         Stopping container postgres
+5m4s        Normal    SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-65cdv
+5m4s        Normal    CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+5m4s        Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+5m4s        Normal    Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+5m4s        Normal    CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+5m4s        Normal    CreatingRole                  cluster/hello-world                       Creating Cluster Role
+5m4s        Normal    NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+5m4s        Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+5m3s        Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+5m1s        Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-49b652ce-22af-44ac-a3ac-664611367fca
+5m          Normal    Created                       pod/hello-world-1-initdb-65cdv            Created container: bootstrap-controller
+5m          Normal    Pulled                        pod/hello-world-1-initdb-65cdv            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+5m          Normal    Scheduled                     pod/hello-world-1-initdb-65cdv            Successfully assigned rup-cnpg/hello-world-1-initdb-65cdv to reconcile-under-policy-single-node-control-plane
+4m59s       Normal    Started                       pod/hello-world-1-initdb-65cdv            Started container bootstrap-controller
+4m59s       Normal    Started                       pod/hello-world-1-initdb-65cdv            Started container initdb
+4m59s       Normal    Pulled                        pod/hello-world-1-initdb-65cdv            Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+4m59s       Normal    Created                       pod/hello-world-1-initdb-65cdv            Created container: initdb
+4m54s       Normal    Completed                     job/hello-world-1-initdb                  Job completed
+4m54s       Normal    Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+4m53s       Normal    Started                       pod/hello-world-1                         Started container bootstrap-controller
+4m53s       Normal    Created                       pod/hello-world-1                         Created container: postgres
+4m53s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+4m53s       Normal    Created                       pod/hello-world-1                         Created container: bootstrap-controller
+4m53s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+4m53s       Normal    Started                       pod/hello-world-1                         Started container postgres
+4m40s       Warning   FailedToUpdateEndpoint        endpoints/hello-world-rw                  Failed to update endpoint rup-cnpg/hello-world-rw: Operation cannot be fulfilled on endpoints "hello-world-rw": StorageError: invalid object, Code: 4, Key: /registry/services/endpoints/rup-cnpg/hello-world-rw, ResourceVersion: 0, AdditionalErrorMsg: Precondition failed: UID in precondition: de82d318-f860-434e-8266-3c8c4ccc1a0e, UID in object meta:
+4m40s       Normal    Killing                       pod/hello-world-1                         Stopping container postgres
+4m28s       Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+4m28s       Normal    NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+4m28s       Normal    CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+4m28s       Normal    CreatingRole                  cluster/hello-world                       Creating Cluster Role
+4m28s       Normal    CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+4m28s       Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+4m28s       Normal    Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+4m28s       Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+4m28s       Normal    SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-hntd5
+4m25s       Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-ce5ae9c0-0581-4bbb-852c-6b9f83911f65
+4m24s       Normal    Pulled                        pod/hello-world-1-initdb-hntd5            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+4m24s       Normal    Started                       pod/hello-world-1-initdb-hntd5            Started container bootstrap-controller
+4m24s       Normal    Created                       pod/hello-world-1-initdb-hntd5            Created container: bootstrap-controller
+4m24s       Normal    Scheduled                     pod/hello-world-1-initdb-hntd5            Successfully assigned rup-cnpg/hello-world-1-initdb-hntd5 to reconcile-under-policy-single-node-control-plane
+4m23s       Normal    Created                       pod/hello-world-1-initdb-hntd5            Created container: initdb
+4m23s       Normal    Pulled                        pod/hello-world-1-initdb-hntd5            Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+4m22s       Normal    Started                       pod/hello-world-1-initdb-hntd5            Started container initdb
+4m18s       Normal    Completed                     job/hello-world-1-initdb                  Job completed
+4m17s       Normal    Started                       pod/hello-world-1                         Started container postgres
+4m17s       Normal    Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+4m17s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+4m17s       Normal    Created                       pod/hello-world-1                         Created container: bootstrap-controller
+4m17s       Normal    Started                       pod/hello-world-1                         Started container bootstrap-controller
+4m17s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+4m17s       Normal    Created                       pod/hello-world-1                         Created container: postgres
+3m59s       Normal    Provisioning                  persistentvolumeclaim/hello-world-2       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-2"
+3m59s       Normal    SuccessfulCreate              job/hello-world-2-join                    Created pod: hello-world-2-join-nczr4
+3m59s       Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-2
+3m59s       Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-2       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m59s       Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-2       waiting for first consumer to be created before binding
+3m57s       Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-2       Successfully provisioned volume pvc-418ed9ea-cead-4e65-b5e8-731bf6286d3d
+3m56s       Normal    Started                       pod/hello-world-2-join-nczr4              Started container bootstrap-controller
+3m56s       Normal    Pulled                        pod/hello-world-2-join-nczr4              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+3m56s       Normal    Created                       pod/hello-world-2-join-nczr4              Created container: bootstrap-controller
+3m56s       Normal    Scheduled                     pod/hello-world-2-join-nczr4              Successfully assigned rup-cnpg/hello-world-2-join-nczr4 to reconcile-under-policy-single-node-control-plane
+3m55s       Normal    Pulled                        pod/hello-world-2-join-nczr4              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+3m55s       Normal    Created                       pod/hello-world-2-join-nczr4              Created container: join
+3m54s       Normal    Started                       pod/hello-world-2-join-nczr4              Started container join
+3m49s       Normal    Created                       pod/hello-world-2                         Created container: postgres
+3m49s       Normal    Created                       pod/hello-world-2                         Created container: bootstrap-controller
+3m49s       Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+3m49s       Normal    Started                       pod/hello-world-2                         Started container bootstrap-controller
+3m49s       Normal    Completed                     job/hello-world-2-join                    Job completed
+3m49s       Normal    Scheduled                     pod/hello-world-2                         Successfully assigned rup-cnpg/hello-world-2 to reconcile-under-policy-single-node-control-plane
+3m49s       Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+3m48s       Normal    Started                       pod/hello-world-2                         Started container postgres
+3m37s       Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world
+3m36s       Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-3
+3m36s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-jjm6r" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+3m35s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-8lkv2" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+3m33s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-gn52h" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+3m29s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-26v8s" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+3m21s       Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-rn5nr" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+3m9s        Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-3       waiting for first consumer to be created before binding
+3m5s        Normal    SuccessfulCreate              job/hello-world-3-join                    Created pod: hello-world-3-join-mp2jf
+3m5s        Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-3       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m5s        Normal    Provisioning                  persistentvolumeclaim/hello-world-3       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-3"
+3m2s        Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-3       Successfully provisioned volume pvc-d6f18ae3-5a40-46c1-b0e5-8d107c36e3d8
+3m1s        Normal    Pulled                        pod/hello-world-3-join-mp2jf              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+3m1s        Normal    Created                       pod/hello-world-3-join-mp2jf              Created container: bootstrap-controller
+3m1s        Normal    Scheduled                     pod/hello-world-3-join-mp2jf              Successfully assigned rup-cnpg/hello-world-3-join-mp2jf to reconcile-under-policy-single-node-control-plane
+3m          Normal    Started                       pod/hello-world-3-join-mp2jf              Started container bootstrap-controller
+2m59s       Normal    Pulled                        pod/hello-world-3-join-mp2jf              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+2m59s       Normal    Created                       pod/hello-world-3-join-mp2jf              Created container: join
+2m59s       Normal    Started                       pod/hello-world-3-join-mp2jf              Started container join
+2m55s       Normal    Scheduled                     pod/hello-world-3                         Successfully assigned rup-cnpg/hello-world-3 to reconcile-under-policy-single-node-control-plane
+2m55s       Normal    Completed                     job/hello-world-3-join                    Job completed
+2m54s       Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+2m54s       Normal    Created                       pod/hello-world-3                         Created container: bootstrap-controller
+2m54s       Normal    Started                       pod/hello-world-3                         Started container bootstrap-controller
+2m53s       Normal    Created                       pod/hello-world-3                         Created container: postgres
+2m53s       Normal    Started                       pod/hello-world-3                         Started container postgres
+2m53s       Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+2m42s       Normal    Killing                       pod/hello-world-2                         Stopping container postgres
+2m42s       Warning   FailedToUpdateEndpoint        endpoints/hello-world-rw                  Failed to update endpoint rup-cnpg/hello-world-rw: Operation cannot be fulfilled on endpoints "hello-world-rw": StorageError: invalid object, Code: 4, Key: /registry/services/endpoints/rup-cnpg/hello-world-rw, ResourceVersion: 0, AdditionalErrorMsg: Precondition failed: UID in precondition: c8115200-d98c-4c07-839a-9db5e39eb3f8, UID in object meta:
+2m42s       Normal    Killing                       pod/hello-world-3                         Stopping container postgres
+2m41s       Normal    Killing                       pod/hello-world-1                         Stopping container postgres
+2m37s       Warning   Unhealthy                     pod/hello-world-1                         Readiness probe failed: HTTP probe failed with statuscode: 500
+2m32s       Normal    NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+2m32s       Normal    CreatingRole                  cluster/hello-world                       Creating Cluster Role
+2m32s       Normal    CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+2m32s       Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+2m31s       Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+2m31s       Normal    SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-2r2g9
+2m31s       Normal    Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+2m31s       Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+2m31s       Normal    CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+2m31s       Normal    WaitForPodScheduled           persistentvolumeclaim/hello-world-1       waiting for pod hello-world-1-initdb-2r2g9 to be scheduled
+2m28s       Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-8c108ef9-50f0-4f7a-8ff9-b8d0c79c961d
+2m27s       Normal    Scheduled                     pod/hello-world-1-initdb-2r2g9            Successfully assigned rup-cnpg/hello-world-1-initdb-2r2g9 to reconcile-under-policy-single-node-control-plane
+2m27s       Normal    Pulled                        pod/hello-world-1-initdb-2r2g9            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+2m26s       Normal    Started                       pod/hello-world-1-initdb-2r2g9            Started container bootstrap-controller
+2m26s       Normal    Created                       pod/hello-world-1-initdb-2r2g9            Created container: bootstrap-controller
+2m25s       Normal    Created                       pod/hello-world-1-initdb-2r2g9            Created container: initdb
+2m25s       Normal    Started                       pod/hello-world-1-initdb-2r2g9            Started container initdb
+2m25s       Normal    Pulled                        pod/hello-world-1-initdb-2r2g9            Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+2m20s       Normal    Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+2m20s       Normal    Completed                     job/hello-world-1-initdb                  Job completed
+2m19s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+2m19s       Normal    Started                       pod/hello-world-1                         Started container bootstrap-controller
+2m19s       Normal    Created                       pod/hello-world-1                         Created container: bootstrap-controller
+2m18s       Normal    Created                       pod/hello-world-1                         Created container: postgres
+2m18s       Normal    Started                       pod/hello-world-1                         Started container postgres
+2m18s       Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+2m6s        Normal    Killing                       pod/hello-world-1                         Stopping container postgres
+119s        Warning   Unhealthy                     pod/hello-world-1                         Readiness probe failed: Get "https://10.244.0.38:8000/readyz": dial tcp 10.244.0.38:8000: connect: connection refused
+112s        Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+112s        Normal    CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+112s        Normal    SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-xw56h
+112s        Normal    Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+112s        Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+112s        Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+112s        Normal    CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+112s        Normal    CreatingRole                  cluster/hello-world                       Creating Cluster Role
+112s        Normal    NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+109s        Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-7c9cbb23-cfa0-4a9c-a225-1bdcedc15b32
+108s        Normal    Scheduled                     pod/hello-world-1-initdb-xw56h            Successfully assigned rup-cnpg/hello-world-1-initdb-xw56h to reconcile-under-policy-single-node-control-plane
+107s        Normal    Created                       pod/hello-world-1-initdb-xw56h            Created container: bootstrap-controller
+107s        Normal    Pulled                        pod/hello-world-1-initdb-xw56h            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+107s        Normal    Started                       pod/hello-world-1-initdb-xw56h            Started container bootstrap-controller
+106s        Normal    Pulled                        pod/hello-world-1-initdb-xw56h            Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+106s        Normal    Created                       pod/hello-world-1-initdb-xw56h            Created container: initdb
+106s        Normal    Started                       pod/hello-world-1-initdb-xw56h            Started container initdb
+100s        Normal    Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+100s        Normal    Completed                     job/hello-world-1-initdb                  Job completed
+99s         Normal    Created                       pod/hello-world-1                         Created container: bootstrap-controller
+99s         Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+99s         Normal    Started                       pod/hello-world-1                         Started container bootstrap-controller
+98s         Normal    Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+98s         Normal    Created                       pod/hello-world-1                         Created container: postgres
+98s         Normal    Started                       pod/hello-world-1                         Started container postgres
+79s         Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-2       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+79s         Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-2
+79s         Normal    Provisioning                  persistentvolumeclaim/hello-world-2       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-2"
+79s         Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-2       waiting for first consumer to be created before binding
+79s         Normal    SuccessfulCreate              job/hello-world-2-join                    Created pod: hello-world-2-join-xhjpz
+76s         Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-2       Successfully provisioned volume pvc-75b3ef8a-be86-4b15-b98e-4e7935abb762
+75s         Normal    Scheduled                     pod/hello-world-2-join-xhjpz              Successfully assigned rup-cnpg/hello-world-2-join-xhjpz to reconcile-under-policy-single-node-control-plane
+75s         Normal    Pulled                        pod/hello-world-2-join-xhjpz              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+75s         Normal    Created                       pod/hello-world-2-join-xhjpz              Created container: bootstrap-controller
+74s         Normal    Started                       pod/hello-world-2-join-xhjpz              Started container bootstrap-controller
+74s         Normal    Pulled                        pod/hello-world-2-join-xhjpz              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+74s         Normal    Created                       pod/hello-world-2-join-xhjpz              Created container: join
+73s         Normal    Started                       pod/hello-world-2-join-xhjpz              Started container join
+68s         Normal    Completed                     job/hello-world-2-join                    Job completed
+67s         Normal    Created                       pod/hello-world-2                         Created container: bootstrap-controller
+67s         Normal    Scheduled                     pod/hello-world-2                         Successfully assigned rup-cnpg/hello-world-2 to reconcile-under-policy-single-node-control-plane
+67s         Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+66s         Normal    Pulled                        pod/hello-world-2                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+66s         Normal    Started                       pod/hello-world-2                         Started container bootstrap-controller
+66s         Normal    Created                       pod/hello-world-2                         Created container: postgres
+65s         Normal    Started                       pod/hello-world-2                         Started container postgres
+54s         Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-nzv9m" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+54s         Normal    CreatingInstance              cluster/hello-world                       Creating instance hello-world-3
+54s         Normal    CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world
+53s         Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-wwdxk" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+51s         Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-26b5w" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+47s         Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-rvztf" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+39s         Warning   FailedCreate                  job/hello-world-3-join                    Error creating: pods "hello-world-3-join-lrqmk" is forbidden: exceeded quota: pod-quota, requested: pods=1, used: pods=2, limited: pods=2
+24s         Normal    WaitForFirstConsumer          persistentvolumeclaim/hello-world-3       waiting for first consumer to be created before binding
+23s         Normal    SuccessfulCreate              job/hello-world-3-join                    Created pod: hello-world-3-join-4dbth
+23s         Normal    Provisioning                  persistentvolumeclaim/hello-world-3       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-3"
+23s         Normal    ExternalProvisioning          persistentvolumeclaim/hello-world-3       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+20s         Normal    ProvisioningSucceeded         persistentvolumeclaim/hello-world-3       Successfully provisioned volume pvc-0dab764d-6763-4446-b529-69ef0399fc7d
+19s         Normal    Scheduled                     pod/hello-world-3-join-4dbth              Successfully assigned rup-cnpg/hello-world-3-join-4dbth to reconcile-under-policy-single-node-control-plane
+18s         Normal    Pulled                        pod/hello-world-3-join-4dbth              Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+18s         Normal    Created                       pod/hello-world-3-join-4dbth              Created container: bootstrap-controller
+18s         Normal    Started                       pod/hello-world-3-join-4dbth              Started container bootstrap-controller
+18s         Normal    Pulled                        pod/hello-world-3-join-4dbth              Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+17s         Normal    Created                       pod/hello-world-3-join-4dbth              Created container: join
+17s         Normal    Started                       pod/hello-world-3-join-4dbth              Started container join
+13s         Normal    Completed                     job/hello-world-3-join                    Job completed
+13s         Normal    Scheduled                     pod/hello-world-3                         Successfully assigned rup-cnpg/hello-world-3 to reconcile-under-policy-single-node-control-plane
+12s         Normal    Created                       pod/hello-world-3                         Created container: bootstrap-controller
+12s         Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+12s         Normal    Started                       pod/hello-world-3                         Started container bootstrap-controller
+11s         Normal    Pulled                        pod/hello-world-3                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+11s         Normal    Created                       pod/hello-world-3                         Created container: postgres
+11s         Normal    Started                       pod/hello-world-3                         Started container postgres

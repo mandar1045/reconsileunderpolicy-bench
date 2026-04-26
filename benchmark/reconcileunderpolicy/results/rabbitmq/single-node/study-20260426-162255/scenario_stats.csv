@@ -1,0 +1,5 @@
+scenario,successful_trials,total_trials,success_rate,mean_seconds,median_seconds,min_seconds,max_seconds,stdev_seconds,durations_seconds
+baseline_create,1,1,1.0,174.63,174.63,174.63,174.63,0.0,174.63
+restart_during_scale,1,1,1.0,78.85,78.85,78.85,78.85,0.0,78.85
+quota_blocked_scale,1,1,1.0,79.62,79.62,79.62,79.62,0.0,79.62
+delete_and_recreate,1,1,1.0,61.88,61.88,61.88,61.88,0.0,61.88

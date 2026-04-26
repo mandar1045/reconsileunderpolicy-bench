@@ -1,0 +1,73 @@
+{
+  "started_at": "2026-04-26T16:16:31.278361+00:00",
+  "study_dir": "/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/rabbitmq/single-node/study-20260426-161631",
+  "cluster_context": "kind-reconcile-under-policy-single-node",
+  "environment": "single-node",
+  "environment_display_name": "Single-node kind",
+  "environment_node_count": 1,
+  "namespace": "rup-rabbitmq",
+  "operator_namespace": "rabbitmq-system",
+  "operator": "RabbitMQ Cluster Operator",
+  "operator_key": "rabbitmq",
+  "trials_requested": 3,
+  "scenario_order": [
+    "baseline_create",
+    "restart_during_scale",
+    "quota_blocked_scale",
+    "delete_and_recreate"
+  ],
+  "trials": [],
+  "completed_at": "2026-04-26T16:20:32.078290+00:00",
+  "success": false,
+  "error": "Command failed (kubectl --context kind-reconcile-under-policy-single-node wait -n rabbitmq-system --for=condition=Available deployment/rabbitmq-cluster-operator --timeout=240s):\nSTDOUT:\n\nSTDERR:\nerror: timed out waiting for the condition on deployments/rabbitmq-cluster-operator\n",
+  "aggregates": [
+    {
+      "scenario": "baseline_create",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "restart_during_scale",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "quota_blocked_scale",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    },
+    {
+      "scenario": "delete_and_recreate",
+      "successful_trials": 0,
+      "total_trials": 0,
+      "success_rate": 0.0,
+      "mean_seconds": 0.0,
+      "median_seconds": 0.0,
+      "min_seconds": 0.0,
+      "max_seconds": 0.0,
+      "stdev_seconds": 0.0,
+      "durations_seconds": []
+    }
+  ]
+}

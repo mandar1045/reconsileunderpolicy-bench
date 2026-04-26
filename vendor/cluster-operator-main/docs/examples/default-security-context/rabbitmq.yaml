@@ -1,0 +1,17 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: default-security-context
+spec:
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            securityContext: {}
+            containers:
+            - name: rabbitmq
+              securityContext: {}
+            initContainers:
+            - name: setup-container
+              securityContext: {}

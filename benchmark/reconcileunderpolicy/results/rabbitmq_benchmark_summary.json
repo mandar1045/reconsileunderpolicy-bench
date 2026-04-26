@@ -1,0 +1,35 @@
+{
+  "started_at": "2026-04-26T15:21:37.927179+00:00",
+  "cluster_context": "kind-reconcile-under-policy",
+  "namespace": "rup-rabbitmq",
+  "operator_namespace": "rabbitmq-system",
+  "operator": "RabbitMQ Cluster Operator",
+  "operator_install_root": "/home/mandar12/Desktop/reconcileunderpolicy-bench/vendor/cluster-operator-main/config/installation",
+  "scenarios": [
+    {
+      "name": "baseline_create",
+      "success": true,
+      "duration_seconds": 64.83,
+      "final_ready_replicas": 1,
+      "notes": "Created a one-node RabbitMQ cluster and measured time to first healthy reconciliation."
+    },
+    {
+      "name": "restart_during_scale",
+      "success": true,
+      "duration_seconds": 79.82,
+      "final_ready_replicas": 2,
+      "operator_pod_deleted": "rabbitmq-cluster-operator-7f6cdbd776-r6qdr",
+      "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+    },
+    {
+      "name": "quota_blocked_scale",
+      "success": true,
+      "duration_seconds": 79.49,
+      "ready_replicas_during_policy_block": 2,
+      "final_ready_replicas": 3,
+      "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+    }
+  ],
+  "completed_at": "2026-04-26T15:25:24.348060+00:00",
+  "success": true
+}

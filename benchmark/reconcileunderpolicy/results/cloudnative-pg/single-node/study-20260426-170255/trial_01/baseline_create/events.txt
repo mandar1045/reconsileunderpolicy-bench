@@ -1,0 +1,27 @@
+LAST SEEN   TYPE     REASON                        OBJECT                                    MESSAGE
+3m51s       Normal   CreatingPodDisruptionBudget   cluster/hello-world                       Creating PodDisruptionBudget hello-world-primary
+3m51s       Normal   NoPods                        poddisruptionbudget/hello-world-primary   No matching pods found
+3m51s       Normal   CreatingRole                  cluster/hello-world                       Creating Cluster Role
+3m51s       Normal   CreatingServiceAccount        cluster/hello-world                       Creating ServiceAccount
+3m50s       Normal   WaitForFirstConsumer          persistentvolumeclaim/hello-world-1       waiting for first consumer to be created before binding
+3m50s       Normal   Provisioning                  persistentvolumeclaim/hello-world-1       External provisioner is provisioning volume for claim "rup-cnpg/hello-world-1"
+3m50s       Normal   CreatingInstance              cluster/hello-world                       Primary instance (initdb)
+3m50s       Normal   ExternalProvisioning          persistentvolumeclaim/hello-world-1       Waiting for a volume to be created either by the external provisioner 'rancher.io/local-path' or manually by the system administrator. If volume creation is delayed, please verify that the provisioner is running and correctly registered.
+3m50s       Normal   SuccessfulCreate              job/hello-world-1-initdb                  Created pod: hello-world-1-initdb-bct7s
+3m47s       Normal   ProvisioningSucceeded         persistentvolumeclaim/hello-world-1       Successfully provisioned volume pvc-7da63fdb-018f-4683-b801-ca9f17a62b11
+3m46s       Normal   Started                       pod/hello-world-1-initdb-bct7s            Started container bootstrap-controller
+3m46s       Normal   Scheduled                     pod/hello-world-1-initdb-bct7s            Successfully assigned rup-cnpg/hello-world-1-initdb-bct7s to reconcile-under-policy-single-node-control-plane
+3m46s       Normal   Created                       pod/hello-world-1-initdb-bct7s            Created container: bootstrap-controller
+3m46s       Normal   Pulled                        pod/hello-world-1-initdb-bct7s            Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+3m45s       Normal   Pulling                       pod/hello-world-1-initdb-bct7s            Pulling image "ghcr.io/cloudnative-pg/postgresql:17"
+17s         Normal   Created                       pod/hello-world-1-initdb-bct7s            Created container: initdb
+17s         Normal   Pulled                        pod/hello-world-1-initdb-bct7s            Successfully pulled image "ghcr.io/cloudnative-pg/postgresql:17" in 3m28.203s (3m28.203s including waiting). Image size: 256044486 bytes.
+16s         Normal   Started                       pod/hello-world-1-initdb-bct7s            Started container initdb
+12s         Normal   Created                       pod/hello-world-1                         Created container: bootstrap-controller
+12s         Normal   Started                       pod/hello-world-1                         Started container bootstrap-controller
+12s         Normal   Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/cloudnative-pg:1.29.0" already present on machine
+12s         Normal   Scheduled                     pod/hello-world-1                         Successfully assigned rup-cnpg/hello-world-1 to reconcile-under-policy-single-node-control-plane
+12s         Normal   Completed                     job/hello-world-1-initdb                  Job completed
+11s         Normal   Pulled                        pod/hello-world-1                         Container image "ghcr.io/cloudnative-pg/postgresql:17" already present on machine
+11s         Normal   Created                       pod/hello-world-1                         Created container: postgres
+11s         Normal   Started                       pod/hello-world-1                         Started container postgres

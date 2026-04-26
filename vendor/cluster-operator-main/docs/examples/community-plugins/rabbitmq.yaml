@@ -1,0 +1,44 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: community-plugins
+spec:
+  replicas: 1
+  image: rabbitmq:3.13-management
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: rabbitmq
+                volumeMounts:
+                  - mountPath: /opt/rabbitmq/community-plugins
+                    name: community-plugins
+            volumes:
+              - name: community-plugins
+                emptyDir: {}
+            initContainers:
+              - command:
+                  - sh
+                  - -c
+                  - curl -L -v https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.13.0/rabbitmq_delayed_message_exchange-3.13.0.ez --output /community-plugins/rabbitmq_delayed_message_exchange-3.13.0.ez
+                image: curlimages/curl
+                imagePullPolicy: IfNotPresent
+                name: copy-community-plugins
+                resources:
+                  limits:
+                    cpu: 1
+                    memory: 2Gi
+                  requests:
+                    cpu: 1
+                    memory: 2Gi
+                terminationMessagePolicy: FallbackToLogsOnError
+                volumeMounts:
+                  - mountPath: /community-plugins/
+                    name: community-plugins
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_delayed_message_exchange
+    envConfig: |
+      RABBITMQ_PLUGINS_DIR=/opt/rabbitmq/plugins:/opt/rabbitmq/community-plugins:/opt/bitnami/rabbitmq/plugins

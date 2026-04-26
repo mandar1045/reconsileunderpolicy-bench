@@ -1,0 +1,3 @@
+NAME                         READY   STATUS      RESTARTS   AGE   IP            NODE                                               NOMINATED NODE   READINESS GATES
+hello-world-1                1/1     Running     0          11s   10.244.0.55   reconcile-under-policy-single-node-control-plane   <none>           <none>
+hello-world-1-initdb-kqr65   0/1     Completed   0          22s   10.244.0.54   reconcile-under-policy-single-node-control-plane   <none>           <none>

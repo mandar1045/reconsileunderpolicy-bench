@@ -1,0 +1,182 @@
+[
+  {
+    "operator": "RabbitMQ Cluster Operator",
+    "operator_key": "rabbitmq",
+    "environment": "single-node",
+    "environment_display_name": "Single-node kind",
+    "trial_count": 3,
+    "aggregates": [
+      {
+        "scenario": "baseline_create",
+        "success": "3/3",
+        "mean_seconds": 175.0,
+        "median_seconds": 174.93,
+        "stdev_seconds": 0.2,
+        "min_seconds": 174.8,
+        "max_seconds": 175.27
+      },
+      {
+        "scenario": "restart_during_scale",
+        "success": "3/3",
+        "mean_seconds": 77.16,
+        "median_seconds": 77.61,
+        "stdev_seconds": 1.48,
+        "min_seconds": 75.17,
+        "max_seconds": 78.71
+      },
+      {
+        "scenario": "quota_blocked_scale",
+        "success": "3/3",
+        "mean_seconds": 80.23,
+        "median_seconds": 79.54,
+        "stdev_seconds": 1.09,
+        "min_seconds": 79.37,
+        "max_seconds": 81.77
+      },
+      {
+        "scenario": "delete_and_recreate",
+        "success": "3/3",
+        "mean_seconds": 59.49,
+        "median_seconds": 59.5,
+        "stdev_seconds": 0.07,
+        "min_seconds": 59.41,
+        "max_seconds": 59.57
+      }
+    ]
+  },
+  {
+    "operator": "RabbitMQ Cluster Operator",
+    "operator_key": "rabbitmq",
+    "environment": "multi-node",
+    "environment_display_name": "Multi-node kind",
+    "trial_count": 3,
+    "aggregates": [
+      {
+        "scenario": "baseline_create",
+        "success": "3/3",
+        "mean_seconds": 192.33,
+        "median_seconds": 189.58,
+        "stdev_seconds": 3.96,
+        "min_seconds": 189.49,
+        "max_seconds": 197.93
+      },
+      {
+        "scenario": "restart_during_scale",
+        "success": "3/3",
+        "mean_seconds": 149.33,
+        "median_seconds": 88.74,
+        "stdev_seconds": 85.8,
+        "min_seconds": 88.58,
+        "max_seconds": 270.66
+      },
+      {
+        "scenario": "quota_blocked_scale",
+        "success": "3/3",
+        "mean_seconds": 93.53,
+        "median_seconds": 92.97,
+        "stdev_seconds": 0.87,
+        "min_seconds": 92.85,
+        "max_seconds": 94.76
+      },
+      {
+        "scenario": "delete_and_recreate",
+        "success": "3/3",
+        "mean_seconds": 72.82,
+        "median_seconds": 72.81,
+        "stdev_seconds": 0.13,
+        "min_seconds": 72.67,
+        "max_seconds": 72.98
+      }
+    ]
+  },
+  {
+    "operator": "CloudNativePG",
+    "operator_key": "cloudnative-pg",
+    "environment": "single-node",
+    "environment_display_name": "Single-node kind",
+    "trial_count": 3,
+    "aggregates": [
+      {
+        "scenario": "baseline_create",
+        "success": "3/3",
+        "mean_seconds": 103.39,
+        "median_seconds": 38.04,
+        "stdev_seconds": 94.31,
+        "min_seconds": 35.37,
+        "max_seconds": 236.76
+      },
+      {
+        "scenario": "restart_during_scale",
+        "success": "3/3",
+        "mean_seconds": 28.78,
+        "median_seconds": 27.72,
+        "stdev_seconds": 1.64,
+        "min_seconds": 27.53,
+        "max_seconds": 31.09
+      },
+      {
+        "scenario": "quota_blocked_scale",
+        "success": "3/3",
+        "mean_seconds": 52.93,
+        "median_seconds": 54.27,
+        "stdev_seconds": 2.07,
+        "min_seconds": 50.0,
+        "max_seconds": 54.51
+      },
+      {
+        "scenario": "delete_and_recreate",
+        "success": "3/3",
+        "mean_seconds": 33.05,
+        "median_seconds": 32.17,
+        "stdev_seconds": 1.25,
+        "min_seconds": 32.16,
+        "max_seconds": 34.81
+      }
+    ]
+  },
+  {
+    "operator": "CloudNativePG",
+    "operator_key": "cloudnative-pg",
+    "environment": "multi-node",
+    "environment_display_name": "Multi-node kind",
+    "trial_count": 3,
+    "aggregates": [
+      {
+        "scenario": "baseline_create",
+        "success": "3/3",
+        "mean_seconds": 114.38,
+        "median_seconds": 35.93,
+        "stdev_seconds": 111.13,
+        "min_seconds": 35.68,
+        "max_seconds": 271.54
+      },
+      {
+        "scenario": "restart_during_scale",
+        "success": "3/3",
+        "mean_seconds": 102.06,
+        "median_seconds": 31.5,
+        "stdev_seconds": 101.44,
+        "min_seconds": 29.16,
+        "max_seconds": 245.51
+      },
+      {
+        "scenario": "quota_blocked_scale",
+        "success": "3/3",
+        "mean_seconds": 54.71,
+        "median_seconds": 54.13,
+        "stdev_seconds": 1.02,
+        "min_seconds": 53.85,
+        "max_seconds": 56.15
+      },
+      {
+        "scenario": "delete_and_recreate",
+        "success": "3/3",
+        "mean_seconds": 32.94,
+        "median_seconds": 33.58,
+        "stdev_seconds": 0.92,
+        "min_seconds": 31.63,
+        "max_seconds": 33.6
+      }
+    ]
+  }
+]

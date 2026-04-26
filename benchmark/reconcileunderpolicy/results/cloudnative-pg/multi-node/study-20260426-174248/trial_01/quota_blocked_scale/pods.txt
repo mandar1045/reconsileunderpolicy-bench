@@ -1,0 +1,4 @@
+NAME            READY   STATUS    RESTARTS   AGE     IP           NODE                                        NOMINATED NODE   READINESS GATES
+hello-world-1   1/1     Running   0          5m14s   10.244.1.4   reconcile-under-policy-multi-node-worker2   <none>           <none>
+hello-world-2   1/1     Running   0          69s     10.244.2.6   reconcile-under-policy-multi-node-worker    <none>           <none>
+hello-world-3   1/1     Running   0          14s     10.244.1.7   reconcile-under-policy-multi-node-worker2   <none>           <none>

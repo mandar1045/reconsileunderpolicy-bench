@@ -1,0 +1,38 @@
+{
+  "trial": 3,
+  "started_at": "2026-04-26T17:34:36.802885+00:00",
+  "scenarios": [
+    {
+      "name": "baseline_create",
+      "success": true,
+      "duration_seconds": 189.49,
+      "final_ready_replicas": 1,
+      "notes": "Created a one-node RabbitMQ Cluster Operator cluster and measured time to first healthy reconciliation."
+    },
+    {
+      "name": "restart_during_scale",
+      "success": true,
+      "duration_seconds": 88.74,
+      "final_ready_replicas": 2,
+      "operator_pod_deleted": "rabbitmq-cluster-operator-7f6cdbd776-j8kvq",
+      "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+    },
+    {
+      "name": "quota_blocked_scale",
+      "success": true,
+      "duration_seconds": 92.97,
+      "ready_replicas_during_policy_block": 2,
+      "final_ready_replicas": 3,
+      "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+    },
+    {
+      "name": "delete_and_recreate",
+      "success": true,
+      "duration_seconds": 72.81,
+      "final_ready_replicas": 1,
+      "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+    }
+  ],
+  "success": true,
+  "completed_at": "2026-04-26T17:42:03.769137+00:00"
+}

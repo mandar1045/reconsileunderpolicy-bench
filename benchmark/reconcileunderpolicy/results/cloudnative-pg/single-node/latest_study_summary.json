@@ -1,0 +1,203 @@
+{
+  "started_at": "2026-04-26T17:02:55.499316+00:00",
+  "study_dir": "/home/mandar12/Desktop/reconcileunderpolicy-bench/benchmark/reconcileunderpolicy/results/cloudnative-pg/single-node/study-20260426-170255",
+  "cluster_context": "kind-reconcile-under-policy-single-node",
+  "environment": "single-node",
+  "environment_display_name": "Single-node kind",
+  "environment_node_count": 1,
+  "namespace": "rup-cnpg",
+  "operator_namespace": "cnpg-system",
+  "operator": "CloudNativePG",
+  "operator_key": "cloudnative-pg",
+  "trials_requested": 3,
+  "scenario_order": [
+    "baseline_create",
+    "restart_during_scale",
+    "quota_blocked_scale",
+    "delete_and_recreate"
+  ],
+  "trials": [
+    {
+      "trial": 1,
+      "started_at": "2026-04-26T17:03:37.654001+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 236.76,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node CloudNativePG cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 27.72,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "cnpg-controller-manager-ddb7496c6-4pw6d",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 50.0,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 32.16,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T17:09:25.837287+00:00"
+    },
+    {
+      "trial": 2,
+      "started_at": "2026-04-26T17:09:25.837723+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 35.37,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node CloudNativePG cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 27.53,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "cnpg-controller-manager-ddb7496c6-gwkz4",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 54.27,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 34.81,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T17:12:00.385133+00:00"
+    },
+    {
+      "trial": 3,
+      "started_at": "2026-04-26T17:12:00.386236+00:00",
+      "scenarios": [
+        {
+          "name": "baseline_create",
+          "success": true,
+          "duration_seconds": 38.04,
+          "final_ready_replicas": 1,
+          "notes": "Created a one-node CloudNativePG cluster and measured time to first healthy reconciliation."
+        },
+        {
+          "name": "restart_during_scale",
+          "success": true,
+          "duration_seconds": 31.09,
+          "final_ready_replicas": 2,
+          "operator_pod_deleted": "cnpg-controller-manager-ddb7496c6-qr8fc",
+          "notes": "Scaled from 1 to 2 replicas while deleting the operator pod to force recovery from an interrupted reconcile path."
+        },
+        {
+          "name": "quota_blocked_scale",
+          "success": true,
+          "duration_seconds": 54.51,
+          "ready_replicas_during_policy_block": 2,
+          "final_ready_replicas": 3,
+          "notes": "Applied a ResourceQuota to intentionally block pod creation during scale-up, then removed it and measured recovery."
+        },
+        {
+          "name": "delete_and_recreate",
+          "success": true,
+          "duration_seconds": 32.17,
+          "final_ready_replicas": 1,
+          "notes": "Deleted the managed cluster and measured the time required to recreate it and return to a healthy single-replica state."
+        }
+      ],
+      "success": true,
+      "completed_at": "2026-04-26T17:14:39.739885+00:00"
+    }
+  ],
+  "aggregates": [
+    {
+      "scenario": "baseline_create",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 103.39,
+      "median_seconds": 38.04,
+      "min_seconds": 35.37,
+      "max_seconds": 236.76,
+      "stdev_seconds": 94.31,
+      "durations_seconds": [
+        236.76,
+        35.37,
+        38.04
+      ]
+    },
+    {
+      "scenario": "restart_during_scale",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 28.78,
+      "median_seconds": 27.72,
+      "min_seconds": 27.53,
+      "max_seconds": 31.09,
+      "stdev_seconds": 1.64,
+      "durations_seconds": [
+        27.72,
+        27.53,
+        31.09
+      ]
+    },
+    {
+      "scenario": "quota_blocked_scale",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 52.93,
+      "median_seconds": 54.27,
+      "min_seconds": 50.0,
+      "max_seconds": 54.51,
+      "stdev_seconds": 2.07,
+      "durations_seconds": [
+        50.0,
+        54.27,
+        54.51
+      ]
+    },
+    {
+      "scenario": "delete_and_recreate",
+      "successful_trials": 3,
+      "total_trials": 3,
+      "success_rate": 1.0,
+      "mean_seconds": 33.05,
+      "median_seconds": 32.17,
+      "min_seconds": 32.16,
+      "max_seconds": 34.81,
+      "stdev_seconds": 1.25,
+      "durations_seconds": [
+        32.16,
+        34.81,
+        32.17
+      ]
+    }
+  ],
+  "completed_at": "2026-04-26T17:14:39.741133+00:00",
+  "success": true
+}

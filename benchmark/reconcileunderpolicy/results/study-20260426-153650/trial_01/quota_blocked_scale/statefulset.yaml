@@ -1,0 +1,292 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    creationTimestamp: "2026-04-26T15:38:46Z"
+    generation: 3
+    labels:
+      app.kubernetes.io/component: rabbitmq
+      app.kubernetes.io/name: hello-world
+      app.kubernetes.io/part-of: rabbitmq
+    name: hello-world-server
+    namespace: rup-rabbitmq
+    ownerReferences:
+    - apiVersion: rabbitmq.com/v1beta1
+      blockOwnerDeletion: true
+      controller: true
+      kind: RabbitmqCluster
+      name: hello-world
+      uid: eda7b41a-bae7-4ca2-823c-1b71d45f3d35
+    resourceVersion: "5333"
+    uid: 0d871c64-1a2b-4842-a04c-ed515615a460
+  spec:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
+    podManagementPolicy: Parallel
+    replicas: 3
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app.kubernetes.io/name: hello-world
+    serviceName: hello-world-nodes
+    template:
+      metadata:
+        labels:
+          app.kubernetes.io/component: rabbitmq
+          app.kubernetes.io/name: hello-world
+          app.kubernetes.io/part-of: rabbitmq
+      spec:
+        automountServiceAccountToken: true
+        containers:
+        - env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: K8S_SERVICE_NAME
+            value: hello-world-nodes
+          - name: RABBITMQ_ENABLED_PLUGINS_FILE
+            value: /operator/enabled_plugins
+          - name: RABBITMQ_USE_LONGNAME
+            value: "true"
+          - name: RABBITMQ_NODENAME
+            value: rabbit@$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE)
+          - name: K8S_HOSTNAME_SUFFIX
+            value: .$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE)
+          image: rabbitmq:4.1.3-management
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /bin/bash
+                - -c
+                - if [ ! -z "$(cat /etc/pod-info/skipPreStopChecks)" ]; then exit
+                  0; fi; rabbitmq-upgrade await_online_quorum_plus_one -t 604800 &&
+                  rabbitmq-upgrade await_online_synchronized_mirror -t 604800 || true
+                  && rabbitmq-upgrade drain -t 604800
+          name: rabbitmq
+          ports:
+          - containerPort: 4369
+            name: epmd
+            protocol: TCP
+          - containerPort: 5672
+            name: amqp
+            protocol: TCP
+          - containerPort: 15672
+            name: management
+            protocol: TCP
+          - containerPort: 15692
+            name: prometheus
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            tcpSocket:
+              port: amqp
+            timeoutSeconds: 5
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          startupProbe:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - rabbitmqctl eval 'rabbit_nodes:reached_target_cluster_size().' | grep
+                -q '^true$'
+            failureThreshold: 30
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/rabbitmq/
+            name: rabbitmq-erlang-cookie
+          - mountPath: /var/lib/rabbitmq/mnesia/
+            name: persistence
+          - mountPath: /operator
+            name: rabbitmq-plugins
+          - mountPath: /etc/rabbitmq/conf.d/10-operatorDefaults.conf
+            name: rabbitmq-confd
+            subPath: operatorDefaults.conf
+          - mountPath: /etc/rabbitmq/conf.d/90-userDefinedConfiguration.conf
+            name: rabbitmq-confd
+            subPath: userDefinedConfiguration.conf
+          - mountPath: /etc/pod-info/
+            name: pod-info
+          - mountPath: /etc/rabbitmq/conf.d/11-default_user.conf
+            name: rabbitmq-confd
+            subPath: default_user.conf
+        dnsPolicy: ClusterFirst
+        initContainers:
+        - command:
+          - sh
+          - -c
+          - cp /tmp/erlang-cookie-secret/.erlang.cookie /var/lib/rabbitmq/.erlang.cookie
+            && chmod 600 /var/lib/rabbitmq/.erlang.cookie ; cp /tmp/rabbitmq-plugins/enabled_plugins
+            /operator/enabled_plugins ; echo '[default]' > /var/lib/rabbitmq/.rabbitmqadmin.conf
+            && sed -e 's/default_user/username/' -e 's/default_pass/password/' /tmp/default_user.conf
+            >> /var/lib/rabbitmq/.rabbitmqadmin.conf && chmod 600 /var/lib/rabbitmq/.rabbitmqadmin.conf
+            ; sleep 30
+          image: rabbitmq:4.1.3-management
+          imagePullPolicy: IfNotPresent
+          name: setup-container
+          resources:
+            limits:
+              cpu: 20m
+              memory: 64Mi
+            requests:
+              cpu: 20m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /tmp/rabbitmq-plugins/
+            name: plugins-conf
+          - mountPath: /var/lib/rabbitmq/
+            name: rabbitmq-erlang-cookie
+          - mountPath: /tmp/erlang-cookie-secret/
+            name: erlang-cookie-secret
+          - mountPath: /operator
+            name: rabbitmq-plugins
+          - mountPath: /var/lib/rabbitmq/mnesia/
+            name: persistence
+          - mountPath: /tmp/default_user.conf
+            name: rabbitmq-confd
+            subPath: default_user.conf
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext:
+          fsGroup: 0
+          runAsNonRoot: true
+          runAsUser: 999
+          seccompProfile:
+            type: RuntimeDefault
+        serviceAccount: hello-world-server
+        serviceAccountName: hello-world-server
+        terminationGracePeriodSeconds: 604800
+        topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: hello-world
+          maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: hello-world-plugins-conf
+          name: plugins-conf
+        - name: rabbitmq-confd
+          projected:
+            defaultMode: 420
+            sources:
+            - configMap:
+                items:
+                - key: operatorDefaults.conf
+                  path: operatorDefaults.conf
+                - key: userDefinedConfiguration.conf
+                  path: userDefinedConfiguration.conf
+                name: hello-world-server-conf
+            - secret:
+                items:
+                - key: default_user.conf
+                  path: default_user.conf
+                name: hello-world-default-user
+        - emptyDir: {}
+          name: rabbitmq-erlang-cookie
+        - name: erlang-cookie-secret
+          secret:
+            defaultMode: 420
+            secretName: hello-world-erlang-cookie
+        - emptyDir: {}
+          name: rabbitmq-plugins
+        - downwardAPI:
+            defaultMode: 420
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.labels['skipPreStopChecks']
+              path: skipPreStopChecks
+          name: pod-info
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        labels:
+          app.kubernetes.io/component: rabbitmq
+          app.kubernetes.io/name: hello-world
+          app.kubernetes.io/part-of: rabbitmq
+        name: persistence
+        namespace: rup-rabbitmq
+        ownerReferences:
+        - apiVersion: rabbitmq.com/v1beta1
+          blockOwnerDeletion: false
+          controller: true
+          kind: RabbitmqCluster
+          name: hello-world
+          uid: eda7b41a-bae7-4ca2-823c-1b71d45f3d35
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: standard
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+  status:
+    availableReplicas: 3
+    collisionCount: 0
+    currentReplicas: 3
+    currentRevision: hello-world-server-798b8f447c
+    observedGeneration: 3
+    readyReplicas: 3
+    replicas: 3
+    updateRevision: hello-world-server-798b8f447c
+    updatedReplicas: 3
+kind: List
+metadata:
+  resourceVersion: ""

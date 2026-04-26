@@ -1,0 +1,4 @@
+NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE    VOLUMEMODE
+hello-world-1   Bound    pvc-ce5ae9c0-0581-4bbb-852c-6b9f83911f65   1Gi        RWO            standard       <unset>                 106s   Filesystem
+hello-world-2   Bound    pvc-418ed9ea-cead-4e65-b5e8-731bf6286d3d   1Gi        RWO            standard       <unset>                 77s    Filesystem
+hello-world-3   Bound    pvc-d6f18ae3-5a40-46c1-b0e5-8d107c36e3d8   1Gi        RWO            standard       <unset>                 54s    Filesystem

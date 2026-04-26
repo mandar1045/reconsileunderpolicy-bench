@@ -1,0 +1,2 @@
+NAME                               STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE   VOLUMEMODE
+persistence-hello-world-server-0   Bound    pvc-70141c52-a13c-4fff-baee-cfd256fd16a2   2Gi        RWO            standard       <unset>                 70s   Filesystem

@@ -1,0 +1,137 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      cnpg.io/lastAppliedSpec: '{"ports":[{"name":"postgres","protocol":"TCP","port":5432,"targetPort":5432}],"selector":{"cnpg.io/cluster":"hello-world","cnpg.io/podRole":"instance"},"type":"ClusterIP"}'
+      cnpg.io/operatorVersion: 1.29.0
+    creationTimestamp: "2026-04-26T17:56:30Z"
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: hello-world
+      app.kubernetes.io/managed-by: cloudnative-pg
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/version: "17"
+      cnpg.io/cluster: hello-world
+    name: hello-world-r
+    namespace: rup-cnpg
+    ownerReferences:
+    - apiVersion: postgresql.cnpg.io/v1
+      controller: true
+      kind: Cluster
+      name: hello-world
+      uid: b1c6f862-5786-4c7b-9758-545fbc31351e
+    resourceVersion: "3585"
+    uid: af1202bc-a67c-4735-bc55-2047bd35bf1c
+  spec:
+    clusterIP: 10.96.101.203
+    clusterIPs:
+    - 10.96.101.203
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      cnpg.io/cluster: hello-world
+      cnpg.io/podRole: instance
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      cnpg.io/lastAppliedSpec: '{"ports":[{"name":"postgres","protocol":"TCP","port":5432,"targetPort":5432}],"selector":{"cnpg.io/cluster":"hello-world","cnpg.io/instanceRole":"replica"},"type":"ClusterIP"}'
+      cnpg.io/operatorVersion: 1.29.0
+    creationTimestamp: "2026-04-26T17:56:30Z"
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: hello-world
+      app.kubernetes.io/managed-by: cloudnative-pg
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/version: "17"
+      cnpg.io/cluster: hello-world
+    name: hello-world-ro
+    namespace: rup-cnpg
+    ownerReferences:
+    - apiVersion: postgresql.cnpg.io/v1
+      controller: true
+      kind: Cluster
+      name: hello-world
+      uid: b1c6f862-5786-4c7b-9758-545fbc31351e
+    resourceVersion: "3589"
+    uid: 63c0b0ad-5945-4dfa-9c54-fdec67d0ea2e
+  spec:
+    clusterIP: 10.96.242.105
+    clusterIPs:
+    - 10.96.242.105
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      cnpg.io/cluster: hello-world
+      cnpg.io/instanceRole: replica
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      cnpg.io/lastAppliedSpec: '{"ports":[{"name":"postgres","protocol":"TCP","port":5432,"targetPort":5432}],"selector":{"cnpg.io/cluster":"hello-world","cnpg.io/instanceRole":"primary"},"type":"ClusterIP"}'
+      cnpg.io/operatorVersion: 1.29.0
+    creationTimestamp: "2026-04-26T17:56:31Z"
+    labels:
+      app.kubernetes.io/component: database
+      app.kubernetes.io/instance: hello-world
+      app.kubernetes.io/managed-by: cloudnative-pg
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/version: "17"
+      cnpg.io/cluster: hello-world
+    name: hello-world-rw
+    namespace: rup-cnpg
+    ownerReferences:
+    - apiVersion: postgresql.cnpg.io/v1
+      controller: true
+      kind: Cluster
+      name: hello-world
+      uid: b1c6f862-5786-4c7b-9758-545fbc31351e
+    resourceVersion: "3593"
+    uid: 777a1cdd-aaf1-4a80-9939-7f23c932a909
+  spec:
+    clusterIP: 10.96.204.114
+    clusterIPs:
+    - 10.96.204.114
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: postgres
+      port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      cnpg.io/cluster: hello-world
+      cnpg.io/instanceRole: primary
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""

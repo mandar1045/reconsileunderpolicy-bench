@@ -1,0 +1,3 @@
+NAME                   READY   STATUS    RESTARTS   AGE     IP            NODE                                               NOMINATED NODE   READINESS GATES
+hello-world-server-0   1/1     Running   0          2m15s   10.244.0.33   reconcile-under-policy-single-node-control-plane   <none>           <none>
+hello-world-server-1   1/1     Running   0          57s     10.244.0.36   reconcile-under-policy-single-node-control-plane   <none>           <none>

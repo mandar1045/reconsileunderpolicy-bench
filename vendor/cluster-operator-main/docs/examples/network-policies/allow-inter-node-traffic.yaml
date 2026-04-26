@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-inter-node-traffic
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/component: rabbitmq
+      app.kubernetes.io/name: network-policies
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/component: rabbitmq
+          app.kubernetes.io/name: network-policies
+    ports:
+    - port: 4369  # epmd
+    - port: 6000  # stream replication, if streams are being used
+      endPort: 6500
+    - port: 25672 # clustering
+    - port: 35672 # CLI tooling
+      endPort: 35682
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/component: rabbitmq
+          app.kubernetes.io/name: network-policies
+    ports:
+    - port: 4369  # epmd
+    - port: 6000  # stream replication, if streams are being used
+      endPort: 6500 
+    - port: 25672 # clustering
+    - port: 35672 # CLI tooling
+      endPort: 35682
