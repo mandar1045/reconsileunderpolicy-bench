@@ -1,31 +1,122 @@
-\documentclass[11pt,a4paper]{article}
+\newif\ifmiddlewaresubmission
+\ifdefined\MiddlewareSubmissionMode
+  \middlewaresubmissiontrue
+\else
+  \middlewaresubmissionfalse
+\fi
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage[margin=2.4cm]{geometry}
+\newif\ifmiddlewarenamed
+\ifdefined\MiddlewareNamedMode
+  \middlewarenamedtrue
+\else
+  \middlewarenamedfalse
+\fi
+
+\newif\ifacmformat
+\IfFileExists{acmart.cls}{
+  \acmformattrue
+  \ifmiddlewaresubmission
+    \ifmiddlewarenamed
+      \documentclass[sigconf,screen]{acmart}
+    \else
+      \documentclass[sigconf,anonymous]{acmart}
+    \fi
+  \else
+    \documentclass[sigconf,screen]{acmart}
+  \fi
+}{
+  \acmformatfalse
+  \documentclass[11pt,a4paper]{article}
+}
+
+\ifacmformat
+  \setcopyright{none}
+  \ifmiddlewaresubmission
+    \settopmatter{printacmref=false}
+  \else
+    \settopmatter{printacmref=true}
+  \fi
+  \renewcommand\footnotetextcopyrightpermission[1]{}
+  \pagestyle{plain}
+  \ifmiddlewaresubmission
+    \acmConference[Middleware 2026 Submission]{ACM/IFIP/USENIX International Middleware Conference}{2026}{}
+    \acmBooktitle{Middleware 2026 Submission}
+  \else
+    \acmConference[Research Draft]{Research Draft}{April 2026}{}
+    \acmBooktitle{Research Draft}
+  \fi
+  \acmDOI{}
+  \acmISBN{}
+\else
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{lmodern}
+  \usepackage[margin=2.4cm]{geometry}
+  \usepackage{parskip}
+  \setlength{\parindent}{0pt}
+\fi
+
+\ifacmformat\else
 \usepackage[hidelinks]{hyperref}
+\fi
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{enumitem}
-\usepackage{parskip}
 \usepackage{array}
 
-\setlength{\parindent}{0pt}
 \setlist[itemize]{leftmargin=1.5em}
 \setlist[enumerate]{leftmargin=1.7em}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \input{generated/study_macros.tex}
 
-\title{\textbf{ReconcileUnderPolicy: A Repeatable Multi-Operator Benchmark for Policy-Constrained Kubernetes Recovery}}
-\author{Mandar Joshi \\ \texttt{mandarjoshi1045@gmail.com}}
-\date{April 2026}
+\title{ReconcileUnderPolicy: A Repeatable Multi-Operator Benchmark for Policy-Constrained Kubernetes Recovery}
+\ifmiddlewaresubmission
+\subtitle{[Experimentation and Deployment]}
+\fi
+
+\ifacmformat
+  \ifmiddlewaresubmission
+    \ifmiddlewarenamed
+      \author{Mandar Joshi}
+      \affiliation{%
+        \institution{Independent Researcher}
+        \city{}
+        \country{India}
+      }
+      \email{mandarjoshi1045@gmail.com}
+      \ccsdesc[500]{Software and its engineering~Cloud computing}
+      \ccsdesc[300]{Computer systems organization~Cloud computing}
+      \keywords{Kubernetes operators, benchmarking, recovery evaluation, reproducibility, stateful systems}
+    \else
+    \ccsdesc[500]{Software and its engineering~Cloud computing}
+    \ccsdesc[300]{Computer systems organization~Cloud computing}
+    \keywords{Kubernetes operators, benchmarking, recovery evaluation, reproducibility, stateful systems}
+    \fi
+  \else
+  \author{Mandar Joshi}
+  \affiliation{%
+    \institution{Independent Researcher}
+    \city{}
+    \country{India}
+  }
+  \email{mandarjoshi1045@gmail.com}
+  \ccsdesc[500]{Software and its engineering~Cloud computing}
+  \ccsdesc[300]{Computer systems organization~Cloud computing}
+  \keywords{Kubernetes operators, benchmarking, recovery evaluation, reproducibility, stateful systems}
+  \fi
+\else
+  \ifmiddlewaresubmission
+    \date{}
+  \else
+    \author{Mandar Joshi \\ \texttt{mandarjoshi1045@gmail.com}}
+    \date{April 2026}
+  \fi
+\fi
 
 \begin{document}
 
-\maketitle
-
+\ifacmformat
 \begin{abstract}
 Kubernetes operators automate deployment, scaling, and recovery for complex
 stateful applications, but lightweight comparative benchmarks for recovery
@@ -48,6 +139,32 @@ was much slower than subsequent runs. The result is a reproducible,
 artifact-backed comparative benchmark that captures both successful recovery
 coverage and scenario-level timing behavior across operators and environments.
 \end{abstract}
+\maketitle
+\else
+\maketitle
+\begin{abstract}
+Kubernetes operators automate deployment, scaling, and recovery for complex
+stateful applications, but lightweight comparative benchmarks for recovery
+behavior are still uncommon. This paper presents \emph{ReconcileUnderPolicy}, a
+standalone benchmark artifact for policy-constrained recovery across
+\RUPOperatorCount{} stateful operators, \RUPEnvironmentCount{} execution
+environments, and four recovery scenarios. The current study evaluates the
+RabbitMQ Cluster Operator and CloudNativePG on both single-node and multi-node
+\texttt{kind} clusters, running \RUPTrialCount{} repeated trials per study for
+\RUPScenarioExecutions{} scenario executions in total. All
+\RUPSuccessfulScenarioExecutions{} scenario executions converged successfully.
+Median completion times reveal substantial operator-specific differences:
+RabbitMQ baseline creation required 174.93\,s and 189.58\,s on single-node and
+multi-node clusters, while CloudNativePG required 38.04\,s and 35.93\,s.
+Delete-and-recreate recovery showed a similar gap, with RabbitMQ at 59.50\,s
+and 72.81\,s versus CloudNativePG at 32.17\,s and 33.58\,s. The benchmark also
+exposes warmup-sensitive variance: CloudNativePG baseline means were
+substantially higher than medians because the first trial in each environment
+was much slower than subsequent runs. The result is a reproducible,
+artifact-backed comparative benchmark that captures both successful recovery
+coverage and scenario-level timing behavior across operators and environments.
+\end{abstract}
+\fi
 
 \section{Introduction}
 
@@ -232,12 +349,12 @@ CloudNativePG & Multi-node & 35.93 & 31.50 & 54.13 & 33.58 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+\begin{table*}[t]
 \centering
 \scriptsize
 \caption{Aggregate statistics across \RUPTrialCount{} trials per study}
 \label{tab:detailed-results}
-\begin{tabularx}{\linewidth}{llYcccc}
+\begin{tabularx}{\textwidth}{llYcccc}
 \toprule
 \textbf{Operator} & \textbf{Env.} & \textbf{Scenario} & \textbf{Success} & \textbf{Mean (s)} & \textbf{Stddev (s)} & \textbf{Range (s)} \\
 \midrule
@@ -259,7 +376,7 @@ CloudNativePG & Multi-node & Quota-blocked scale & 3/3 & 54.71 & 1.02 & 53.85--5
 CloudNativePG & Multi-node & Delete and recreate & 3/3 & 32.94 & 0.92 & 31.63--33.60 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 Four observations stand out.
 
@@ -388,7 +505,11 @@ supports a stronger publication claim than a pilot artifact alone: it offers a
 reproducible methodology, real comparative data, and a reusable baseline for
 larger studies of policy-constrained operator recovery.
 
+\ifacmformat
+\bibliographystyle{ACM-Reference-Format}
+\else
 \bibliographystyle{plain}
+\fi
 \bibliography{references}
 
 \end{document}

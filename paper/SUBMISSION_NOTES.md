@@ -22,6 +22,11 @@ space. It is no longer only a RabbitMQ pilot.
 The paper’s comparative claims are aligned with the benchmark results that are
 already present in the repository.
 
+The manuscript source is also prepared for ACM packaging: if `acmart.cls` is
+installed on the build machine, `paper/reconcileunderpolicy_study.tex` will
+automatically compile in ACM `sigconf` mode; otherwise it falls back to the
+local article-mode build used in this repository.
+
 ## Best current fit
 
 The strongest near-term targets are venues or tracks that value:

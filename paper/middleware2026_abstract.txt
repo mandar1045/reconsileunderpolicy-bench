@@ -1,0 +1,16 @@
+ReconcileUnderPolicy is a standalone benchmark artifact for policy-constrained
+recovery across two stateful Kubernetes operators, two execution environments,
+and four recovery scenarios. The current study evaluates RabbitMQ Cluster
+Operator and CloudNativePG on both single-node and multi-node kind clusters,
+running three repeated trials per study for 48 scenario executions in total.
+All 48 scenario executions converged successfully. Median completion times
+reveal substantial operator-specific differences: RabbitMQ baseline creation
+required 174.93 s and 189.58 s on single-node and multi-node clusters, while
+CloudNativePG required 38.04 s and 35.93 s. Delete-and-recreate recovery showed
+a similar gap, with RabbitMQ at 59.50 s and 72.81 s versus CloudNativePG at
+32.17 s and 33.58 s. The benchmark also exposes warmup-sensitive variance:
+CloudNativePG baseline means were substantially higher than medians because the
+first trial in each environment was much slower than subsequent runs. The
+result is a reproducible, artifact-backed comparative benchmark that captures
+both successful recovery coverage and scenario-level timing behavior across
+operators and environments.
